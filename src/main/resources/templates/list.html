@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/css/main.css"
+      th:href="@{/css/main.css}"
+    />
+    <title>Rent a Cat</title>
+  </head>
+  <body>
+    <h2>List of cats</h2>
+    <table>
+      <tr>
+        <th>Nimi</th>
+        <th>Laji</th>
+        <th>Omistaja</th>
+        <th>Lempilelu</th>
+        <th>Kaupunki</th>
+      </tr>
+
+      <tr th:each="cat : ${cats}">
+        <td th:text="${cat.name}"></td>
+        <td th:text="${cat.breed}"></td>
+        <td th:text="${cat.owner}"></td>
+        <td th:text="${cat.toy}"></td>
+        <!-- TODO: Show cat city name: 1  -->
+
+        <td><a th:href="@{/delete/{id}(id=${cat.id})}">Delete</a></td>
+        <td><a th:href="@{/edit/{id}(id=${cat.id})}">Edit</a></td>
+      </tr>
+    </table>
+    <a class="add" href="/add">Add a Cat</a>
+  </body>
+</html>

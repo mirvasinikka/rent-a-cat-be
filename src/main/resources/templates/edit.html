@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link type="text/css" rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>Cat info</h2>
+	
+	<div>
+		<form th:object="${cat}" th:action="@{/save}" action="#" method="post">
+			<input type="hidden" id="id" th:field="*{id}" />
+
+			<label for="name">Nimi</label>
+			<input type="text" id="name" th:field="*{name}" />
+			<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+
+			<div id="lab"></div>
+			<label for="breed">Laji</label>
+			<input type="text" id="breed" th:field="*{breed}" />
+			<div th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}">Error</div>
+
+			<div id="lab"></div>
+			<label for="owner">Omistaja</label>
+			<input type="text" id="owner" th:field="*{owner}" />
+			<div th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}">Error</div>
+
+			<div id="lab"></div>
+			<label for="toy">Lemilelu</label>
+			<input type="text" id="toy" th:field="*{toy}" />
+			<div th:if="${#fields.hasErrors('toy')}" th:errors="*{toy}">Error</div>
+			
+		    <!-- TODO: Add list of cities dropdown: 1  -->
+
+			<div id="lab"></div>
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
