@@ -29,7 +29,7 @@
         <td th:text="${cat.breed}"></td>
         <td th:text="${cat.owner}"></td>
         <td th:text="${cat.toy}"></td>
-        <!-- TODO: Show cat city name: 1  -->
+        <td th:text="${cat.city.name}"></td>   
 
         <td><a th:href="@{/delete/{id}(id=${cat.id})}">Delete</a></td>
         <td><a th:href="@{/edit/{id}(id=${cat.id})}">Edit</a></td>

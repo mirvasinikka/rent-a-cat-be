@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import Harjoitustyo.RentACatBE.domain.Cat;
 import Harjoitustyo.RentACatBE.domain.CatRepository;
+import Harjoitustyo.RentACatBE.domain.CityRepository;
 
 import jakarta.validation.Valid;
 
@@ -22,7 +23,9 @@ public class CatController {
 	@Autowired
 	private CatRepository repository;
 	
-	// TODO: Add CityRepository Field : 4
+	@Autowired
+    private CityRepository crepository;
+
 
 	@RequestMapping("/main")
 	@ResponseBody
@@ -38,7 +41,7 @@ public class CatController {
 
 	@GetMapping("/add")
 	public String addCat(Model model) {
-		// TODO: set attribute to cities: 4
+		model.addAttribute("citys", crepository.findAll());
 		model.addAttribute("cat", new Cat());
 		
 		return "add";
@@ -47,7 +50,7 @@ public class CatController {
 	@PostMapping("/save")
 	public String save(@Valid @ModelAttribute("cat") Cat cat, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
-			// TODO: set attribute to cities: 4
+			model.addAttribute("citys", crepository.findAll());
 			return "edit";
 		}
 		repository.save(cat);
@@ -64,7 +67,7 @@ public class CatController {
 	    public String editCat(@PathVariable("id") Long id, Model model) {
 		 	repository.findById(id).orElse(new Cat());
 	    	model.addAttribute("cat", repository.findById(id));
-			// TODO: set attribute to cities: 4
+			model.addAttribute("citys", crepository.findAll());
 	    	return "edit";
 	    }
 	    

@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Bean;
 
 import Harjoitustyo.RentACatBE.domain.Cat;
 import Harjoitustyo.RentACatBE.domain.CatRepository;
-
+import Harjoitustyo.RentACatBE.domain.City;
+import Harjoitustyo.RentACatBE.domain.CityRepository;
 
 
 @SpringBootApplication
@@ -18,17 +19,19 @@ public class RentACatBeApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner listOfCats(CatRepository repository) {
+	public CommandLineRunner listOfCats(CatRepository repository, CityRepository crepository) {
 		return (args) -> {
 			System.out.println("Hardcode list of cats");
 		
+			crepository.save(new City("Helsinki"));
+            crepository.save(new City("Vantaa"));
+            crepository.save(new City("Espoo"));
+            crepository.save(new City("Tampere"));
+            crepository.save(new City("Turku"));
 
-			// TODO: Save mock data with city : 5
-			repository.save(new Cat("Miri", "Scottish long hair", "Mirva", "pallo"));
-			repository.save(new Cat("Musti", "Persian", "Pekka", "naru"));
-			repository.save(new Cat("Molla", "Thai Siamese", "Vilma", "Hiiri"));
-
-			
+			repository.save(new Cat("Miri", "Scottish long hair", "Mirva", "pallo", crepository.findByName("Helsinki").get(0)));
+            repository.save(new Cat("Musti", "Persian", "Pekka", "naru", crepository.findByName("Espoo").get(0)));
+            repository.save(new Cat("Molla", "Thai Siamese", "Vilma", "Hiiri", crepository.findByName("Turku").get(0)));
 		
 			for (Cat cat : repository.findAll()) {
 				System.out.println(cat.toString());

@@ -34,14 +34,24 @@ public class Cat {
 	@Size (min=2, max=20)
 	private String toy;
 	
-    //  TODO: Add relation to City: 3
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "city")
+    private City city;
 	
 	public Cat() {
 		super();
 	}
 
 
-	// TODO: Create a constructor with City: 3
+	public Cat(String name, String breed, String owner, String toy, City city) {
+        super();
+        this.name = name;
+        this.breed = breed;
+        this.owner = owner;
+        this.toy = toy;
+        this.city = city;
+    }
 
 
 
@@ -126,7 +136,14 @@ public class Cat {
 
 
 
+	public City getCity() {
+		return city;
+	}
 
+
+	public void setCity(City city) {
+		this.city = city;
+	}
 
 
 

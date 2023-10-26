@@ -29,9 +29,12 @@
 			<label for="toy">Lemilelu</label>
 			<input type="text" id="toy" th:field="*{toy}" />
 			<div th:if="${#fields.hasErrors('toy')}" th:errors="*{toy}">Error</div>
-			
 		
-   			<!-- TODO: Add list drop down of cities: 2  -->
+   			<div id="lab"></div>
+            <label for="citylist">Kaupunki</label>
+             <select id="citylist" th:field="*{city}" class="form-control">
+                <option th:each="city: ${citys}" th:value="${city.cityid}" th:text="${city.name}"></option>
+            </select>
 
 			<div id="lab"></div>
 			<input type="submit" value="Save"></input>
