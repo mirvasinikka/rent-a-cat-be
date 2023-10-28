@@ -24,6 +24,11 @@
         <th>Kaupunki</th>
         <th>Postinumero</th>
         <th>Osoite</th>
+         <th> 
+        	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos"/></form> 
+		</th>
+		<th> <p> Roolisi on: </p><span sec:authentication="name"></span> </th>
       </tr>
 
       <tr th:each="cat : ${cats}">
@@ -35,10 +40,10 @@
          <td th:text="${cat.address.postCode}"></td>
           <td th:text="${cat.address.street}"></td>     
 
-        <td><a th:href="@{/delete/{id}(id=${cat.id})}">Delete</a></td>
-        <td><a th:href="@{/edit/{id}(id=${cat.id})}">Edit</a></td>
+        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${cat.id})}">Delete</a></td>
+        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${cat.id})}">Edit</a></td>
       </tr>
     </table>
-    <a class="add" href="/add">Add a Cat</a>
+    <a sec:authorize="hasAuthority('ADMIN')" class="add" href="/add">Add a Cat</a>
   </body>
 </html>

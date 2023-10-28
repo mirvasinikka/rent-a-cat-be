@@ -22,7 +22,7 @@ public class RentACatBeApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner listOfCats(CatRepository repository, AddressRepository arepository) {
+	public CommandLineRunner listOfCats(CatRepository repository, AddressRepository arepository, AppUserRepository urepository) {
 		return (args) -> {
 			System.out.println("Hardcode list of cats");
 			
@@ -33,9 +33,9 @@ public class RentACatBeApplication {
 			repository.save(new Cat("Miri", "Scottish long hair", "Mirva", "pallo", arepository.findByCity("Helsinki").get(0)));
             repository.save(new Cat("Musti", "Persian", "Pekka", "naru", arepository.findByCity("Espoo").get(0)));
             repository.save(new Cat("Molla", "Thai Siamese", "Vilma", "Hiiri", arepository.findByCity("Vantaa").get(0)));
-		
             
-        
+            urepository.save(new AppUser("user", "$2a$10$XPMxMF40UOfpo1jxytJ8g.B3uEA9VfqvqHa/WBqTI.HpUew3uzlEa", "USER"));
+            urepository.save(new AppUser("admin", "$2a$10$M8I15ZmXIBC2tFTBP/cdR.//tCZ51EXm34tA2/Q/xqyGL2HYyYY9i",  "ADMIN"));
             
             
 			for (Cat cat : repository.findAll()) {
