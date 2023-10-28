@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface CityRepository  extends CrudRepository<City, Long>{
+public interface AddressRepository extends CrudRepository<Address, Long>{
 
-	List<City> findByName(String name);
+	List<Address> findByCity(String city);
 }

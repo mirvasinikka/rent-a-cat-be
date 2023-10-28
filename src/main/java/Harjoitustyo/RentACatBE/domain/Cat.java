@@ -1,7 +1,5 @@
 package Harjoitustyo.RentACatBE.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,23 +32,23 @@ public class Cat {
 	@Size (min=2, max=20)
 	private String toy;
 	
-    @JsonIgnore
+    
     @ManyToOne
-    @JoinColumn(name = "city")
-    private City city;
+    @JoinColumn(name = "address_id")
+    private Address address;
 	
 	public Cat() {
 		super();
 	}
 
 
-	public Cat(String name, String breed, String owner, String toy, City city) {
+	public Cat(String name, String breed, String owner, String toy, Address address) {
         super();
         this.name = name;
         this.breed = breed;
         this.owner = owner;
         this.toy = toy;
-        this.city = city;
+        this.address = address;
     }
 
 
@@ -64,6 +62,16 @@ public class Cat {
 	}
 
 
+
+
+	public Address getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 
 	public Long getId() {
@@ -135,25 +143,10 @@ public class Cat {
 
 
 
-
-	public City getCity() {
-		return city;
-	}
-
-
-	public void setCity(City city) {
-		this.city = city;
-	}
-
-
-
-
 	@Override
 	public String toString() {
 		return "Cat [id=" + id + ", name=" + name + ", breed=" + breed + ", owner=" + owner + ", toy=" + toy + "]";
 	}
-	
-	
 	
 	
 

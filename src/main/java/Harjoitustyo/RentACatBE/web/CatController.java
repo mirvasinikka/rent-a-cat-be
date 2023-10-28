@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import Harjoitustyo.RentACatBE.domain.Address;
+import Harjoitustyo.RentACatBE.domain.AddressRepository;
 import Harjoitustyo.RentACatBE.domain.Cat;
 import Harjoitustyo.RentACatBE.domain.CatRepository;
-import Harjoitustyo.RentACatBE.domain.CityRepository;
 
 import jakarta.validation.Valid;
 
@@ -22,10 +23,10 @@ public class CatController {
 	
 	@Autowired
 	private CatRepository repository;
-	
-	@Autowired
-    private CityRepository crepository;
 
+    @Autowired
+	private AddressRepository arepository;
+	
 
 	@RequestMapping("/main")
 	@ResponseBody
@@ -41,8 +42,11 @@ public class CatController {
 
 	@GetMapping("/add")
 	public String addCat(Model model) {
-		model.addAttribute("citys", crepository.findAll());
-		model.addAttribute("cat", new Cat());
+		Cat cat = new Cat(); // Create a new Cat
+		Address address = new Address(); // Create a new Address
+		cat.setAddress(address); // Associate the Address with the Cat
+		model.addAttribute("cat", cat); // Add the Cat to the model
+	
 		
 		return "add";
 	}
@@ -50,9 +54,20 @@ public class CatController {
 	@PostMapping("/save")
 	public String save(@Valid @ModelAttribute("cat") Cat cat, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("citys", crepository.findAll());
 			return "edit";
 		}
+		
+		// Get the address associated with the cat
+	    Address address = cat.getAddress();
+
+
+	    // Check if the address is new (doesn't have an ID)
+	    if (address.getAddress_id() == null) {
+	        // Save the address
+	        arepository.save(address);
+	    }
+
+		
 		repository.save(cat);
 		return "redirect:/list";
 	}
@@ -67,7 +82,7 @@ public class CatController {
 	    public String editCat(@PathVariable("id") Long id, Model model) {
 		 	repository.findById(id).orElse(new Cat());
 	    	model.addAttribute("cat", repository.findById(id));
-			model.addAttribute("citys", crepository.findAll());
+	    	model.addAttribute("address", arepository.findAll());
 	    	return "edit";
 	    }
 	    

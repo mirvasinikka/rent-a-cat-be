@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 >
   <head>
     <meta charset="UTF-8" />
@@ -22,6 +22,8 @@
         <th>Omistaja</th>
         <th>Lempilelu</th>
         <th>Kaupunki</th>
+        <th>Postinumero</th>
+        <th>Osoite</th>
       </tr>
 
       <tr th:each="cat : ${cats}">
@@ -29,7 +31,9 @@
         <td th:text="${cat.breed}"></td>
         <td th:text="${cat.owner}"></td>
         <td th:text="${cat.toy}"></td>
-        <td th:text="${cat.city.name}"></td>   
+        <td th:text="${cat.address.city}"></td>  
+         <td th:text="${cat.address.postCode}"></td>
+          <td th:text="${cat.address.street}"></td>     
 
         <td><a th:href="@{/delete/{id}(id=${cat.id})}">Delete</a></td>
         <td><a th:href="@{/edit/{id}(id=${cat.id})}">Edit</a></td>

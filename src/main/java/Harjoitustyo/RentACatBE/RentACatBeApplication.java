@@ -5,10 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import Harjoitustyo.RentACatBE.domain.Address;
+import Harjoitustyo.RentACatBE.domain.AddressRepository;
+import Harjoitustyo.RentACatBE.domain.AppUser;
+import Harjoitustyo.RentACatBE.domain.AppUserRepository;
 import Harjoitustyo.RentACatBE.domain.Cat;
 import Harjoitustyo.RentACatBE.domain.CatRepository;
-import Harjoitustyo.RentACatBE.domain.City;
-import Harjoitustyo.RentACatBE.domain.CityRepository;
+
 
 
 @SpringBootApplication
@@ -19,20 +22,22 @@ public class RentACatBeApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner listOfCats(CatRepository repository, CityRepository crepository) {
+	public CommandLineRunner listOfCats(CatRepository repository, AddressRepository arepository) {
 		return (args) -> {
 			System.out.println("Hardcode list of cats");
-		
-			crepository.save(new City("Helsinki"));
-            crepository.save(new City("Vantaa"));
-            crepository.save(new City("Espoo"));
-            crepository.save(new City("Tampere"));
-            crepository.save(new City("Turku"));
+			
+			arepository.save(new Address("katu", "Helsinki", "00940"));
+			arepository.save(new Address("kuja", "Vantaa", "05550"));
+			arepository.save(new Address("katu", "Espoo", "03330"));
 
-			repository.save(new Cat("Miri", "Scottish long hair", "Mirva", "pallo", crepository.findByName("Helsinki").get(0)));
-            repository.save(new Cat("Musti", "Persian", "Pekka", "naru", crepository.findByName("Espoo").get(0)));
-            repository.save(new Cat("Molla", "Thai Siamese", "Vilma", "Hiiri", crepository.findByName("Turku").get(0)));
+			repository.save(new Cat("Miri", "Scottish long hair", "Mirva", "pallo", arepository.findByCity("Helsinki").get(0)));
+            repository.save(new Cat("Musti", "Persian", "Pekka", "naru", arepository.findByCity("Espoo").get(0)));
+            repository.save(new Cat("Molla", "Thai Siamese", "Vilma", "Hiiri", arepository.findByCity("Vantaa").get(0)));
 		
+            
+        
+            
+            
 			for (Cat cat : repository.findAll()) {
 				System.out.println(cat.toString());
 			}

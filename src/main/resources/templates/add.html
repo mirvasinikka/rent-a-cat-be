@@ -29,12 +29,22 @@
 			<label for="toy">Lemilelu</label>
 			<input type="text" id="toy" th:field="*{toy}" />
 			<div th:if="${#fields.hasErrors('toy')}" th:errors="*{toy}">Error</div>
-		
-   			<div id="lab"></div>
-            <label for="citylist">Kaupunki</label>
-             <select id="citylist" th:field="*{city}" class="form-control">
-                <option th:each="city: ${citys}" th:value="${city.cityid}" th:text="${city.name}"></option>
-            </select>
+			
+			<div id="lab"></div>
+			<label for="street">Osoite</label>
+			<input type="text" id="street" th:field="*{address.street}" />
+			<div th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}">Error</div>
+			
+			<div id="lab"></div>
+			<label for="postCode">Postinumero</label>
+			<input type="text" id="postCode" th:field="*{address.postCode}" />
+			<div th:if="${#fields.hasErrors('address.postCode')}" th:errors="*{address.postCode}">Error</div>
+			
+			<div id="lab"></div>
+			<label for="city">Kaupunki</label>
+			<input type="text" id="city" th:field="*{address.city}" />
+			<div th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}">Error</div>
+			
 
 			<div id="lab"></div>
 			<input type="submit" value="Save"></input>
