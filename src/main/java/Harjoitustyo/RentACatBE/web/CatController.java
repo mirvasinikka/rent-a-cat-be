@@ -42,10 +42,10 @@ public class CatController {
 
 	@GetMapping("/add")
 	public String addCat(Model model) {
-		Cat cat = new Cat(); // Create a new Cat
-		Address address = new Address(); // Create a new Address
-		cat.setAddress(address); // Associate the Address with the Cat
-		model.addAttribute("cat", cat); // Add the Cat to the model
+		Cat cat = new Cat(); 
+		Address address = new Address(); 
+		cat.setAddress(address); 
+		model.addAttribute("cat", cat);
 	
 		
 		return "add";
@@ -63,7 +63,6 @@ public class CatController {
 
 	    // Check if the address is new (doesn't have an ID)
 	    if (address.getAddress_id() == null) {
-	        // Save the address
 	        arepository.save(address);
 	    }
 

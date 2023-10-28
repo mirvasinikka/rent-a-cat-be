@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="UserTable")
-public class AppUser {
+@Table(name="Users")
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,17 +25,35 @@ public class AppUser {
 	
 	@Column(name = "role", nullable = false)
 	private String role;
+	
+	@Column(name = "city", nullable = false)
+	private String city;
+	
+	@Column(name = "firstName", nullable = false)
+	private String fName;
+	
+	@Column(name = "lastName", nullable = false)
+	private String lName;
+	
+	@Column(name = "email", nullable = false)
+	private String email;
 
-	public AppUser() {
+	public User() {
 		super();
 	}
 	
-	public AppUser(String username, String password, String role) {
-		super();
+
+	public User(String username, String password, String role, String city, String fName, String lName,
+			String email) {
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.city = city;
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
 	}
+	
 
 	public Long getId() {
 		return id;
@@ -70,13 +88,66 @@ public class AppUser {
 		this.role = role;
 	}
 
+
+	public String getCity() {
+		return city;
+	}
+
+
+
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+
+
+	public String getfName() {
+		return fName;
+	}
+
+
+
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+
+
+
+	public String getlName() {
+		return lName;
+	}
+
+
+
+
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "AppUser [id=" + id + ", username=" + username + ", password=" + password
-				+ ", role=" + role + "]";
+		return "User [username=" + username + ", password=" + password + ", role=" + role + ", city=" + city
+				+ ", fName=" + fName + ", lName=" + lName + ", email=" + email + "]";
 	}
-	
-	
-	
 
 }

@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Bean;
 
 import Harjoitustyo.RentACatBE.domain.Address;
 import Harjoitustyo.RentACatBE.domain.AddressRepository;
-import Harjoitustyo.RentACatBE.domain.AppUser;
-import Harjoitustyo.RentACatBE.domain.AppUserRepository;
+import Harjoitustyo.RentACatBE.domain.User;
+import Harjoitustyo.RentACatBE.domain.UserRepository;
 import Harjoitustyo.RentACatBE.domain.Cat;
 import Harjoitustyo.RentACatBE.domain.CatRepository;
 
@@ -22,7 +22,7 @@ public class RentACatBeApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner listOfCats(CatRepository repository, AddressRepository arepository, AppUserRepository urepository) {
+	public CommandLineRunner listOfCats(CatRepository repository, AddressRepository arepository, UserRepository urepository) {
 		return (args) -> {
 			System.out.println("Hardcode list of cats");
 			
@@ -34,14 +34,14 @@ public class RentACatBeApplication {
             repository.save(new Cat("Musti", "Persian", "Pekka", "naru", arepository.findByCity("Espoo").get(0)));
             repository.save(new Cat("Molla", "Thai Siamese", "Vilma", "Hiiri", arepository.findByCity("Vantaa").get(0)));
             
-            urepository.save(new AppUser("user", "$2a$10$XPMxMF40UOfpo1jxytJ8g.B3uEA9VfqvqHa/WBqTI.HpUew3uzlEa", "USER"));
-            urepository.save(new AppUser("admin", "$2a$10$M8I15ZmXIBC2tFTBP/cdR.//tCZ51EXm34tA2/Q/xqyGL2HYyYY9i",  "ADMIN"));
-            
+            urepository.save(new User("user", "$2a$10$XPMxMF40UOfpo1jxytJ8g.B3uEA9VfqvqHa/WBqTI.HpUew3uzlEa", "USER", "Helsinki", "Mikko", "Mallikas", "mikko.mallika"));
+            urepository.save(new User("admin", "$2a$10$M8I15ZmXIBC2tFTBP/cdR.//tCZ51EXm34tA2/Q/xqyGL2HYyYY9i",  "ADMIN", "Vantaa","Malla", "Mollamaija", "malla.mollamaija"));
+
             
 			for (Cat cat : repository.findAll()) {
 				System.out.println(cat.toString());
 			}
-		
+					
 		};
 		
 	}

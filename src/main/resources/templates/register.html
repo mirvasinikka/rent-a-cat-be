@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+<link type="text/css" rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+<meta charset="UTF-8">
+<title>Register a user</title>
+</head>
+<body>
+	<div>
+		<form th:object="${registerform}" th:action="@{/saveuser}" action="#" method="post">
+
+			<label for="username">Käyttäjätunnus</label>
+			<input type="text" id="username" th:field="*{username}" />
+			<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
+			
+			<div id="lab"></div>
+			<label for="firstName">Etunimi</label>
+			<input type="text" id="ufirstName" th:field="*{firstName}" />
+			<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</p>	
+			
+			<div id="lab"></div>
+			<label for="lastName">Sukunimi</label>
+			<input type="text" id="lastName" th:field="*{lastName}" />
+			<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</p>	
+			
+			<div id="lab"></div>
+			<label for="email">Sähköposti</label>
+			<input type="text" id="email" th:field="*{email}" />
+			<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</p>	
+			
+			<div id="lab"></div>
+			<label for="city">Kaupunki</label>
+			<input type="text" id="city" th:field="*{city}" />
+			<p th:if="${#fields.hasErrors('city')}" th:errors="*{city}">email Error</p>	
+			
+			<div id="lab"></div>
+			<label for="password">Salasana</label>
+			<input type="text" id="password" th:field="*{password}" />
+			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</p>	
+			
+			<div id="lab"></div>
+			<label for="passwordCheck">Kirjoita salasana uudelleen</label>
+			<input type="text" id="passwordCheck" th:field="*{passwordCheck}" />
+			<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">passwordCheck Error</p>	
+			
+			<input type="submit" class="btn btn-primary" value="register"></input>		
+			
+		</form>	
+	</div>
+</body>
+</html>

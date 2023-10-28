@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/css/main.css"
+      th:href="@{/css/main.css}"
+    />
+    <title>Users</title>
+  </head>
+  <body>
+    <h2>Users</h2>
+    <table>
+      <tr>
+        <th>Käyttäjänimi</th>
+        <th>Rooli</th>
+        <th>Kaupunki</th>
+        <th>Etunimi</th>
+        <th>Sukunimi</th>
+        <th>s.posti</th>
+        <th>
+          <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Kirjaudu ulos" />
+          </form>
+        </th>
+        <th>
+          <p>Roolisi on:</p>
+          <span sec:authentication="name"></span>
+        </th>
+      </tr>
+
+      <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role}"></td>
+        <td th:text="${user.city}"></td>
+        <td th:text="${user.fName}"></td>
+        <td th:text="${user.lName}"></td>
+        <td th:text="${user.email}"></td>
+        <td><a th:href="@{/deleteuser/{id}(id=${user.id})}">Delete</a></td>
+      </tr>
+    </table>
+    <a class="register" href="/register">Add a user</a>
+    <a class="list" href="/list">Takaisin kissoihin</a>
+  </body>
+</html>
