@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,8 +28,6 @@ public class User {
 	@Column(name = "role", nullable = false)
 	private String role;
 	
-	@Column(name = "city", nullable = false)
-	private String city;
 	
 	@Column(name = "firstName", nullable = false)
 	private String fName;
@@ -37,23 +37,33 @@ public class User {
 	
 	@Column(name = "email", nullable = false)
 	private String email;
+	
+	@ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+	
 
 	public User() {
 		super();
 	}
 	
+	
+	
 
-	public User(String username, String password, String role, String city, String fName, String lName,
-			String email) {
+	public User(String username, String password, String role, String fName, String lName, String email,
+			Address address) {
+		super();
 		this.username = username;
 		this.password = password;
 		this.role = role;
-		this.city = city;
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
+		this.address = address;
 	}
-	
+
+
+
 
 	public Long getId() {
 		return id;
@@ -87,19 +97,6 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
-
-	public String getCity() {
-		return city;
-	}
-
-
-
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 
 
 
@@ -141,12 +138,26 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+
+	public Address getAddress() {
+		return address;
+	}
+
+
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 
 
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", role=" + role + ", city=" + city
+		return "User [username=" + username + ", password=" + password + ", role=" + role
 				+ ", fName=" + fName + ", lName=" + lName + ", email=" + email + "]";
 	}
 

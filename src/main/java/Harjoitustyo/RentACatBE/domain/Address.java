@@ -29,6 +29,11 @@ public class Address {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
 	private List<Cat> cats;
     
+    @JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
+	private List<User> users;
+    
+    
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub

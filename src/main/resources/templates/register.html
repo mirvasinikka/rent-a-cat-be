@@ -31,6 +31,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 			<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</p>	
 			
 			<div id="lab"></div>
+			<label for="street">Osoite</label>
+			<input type="text" id="street" th:field="*{street}" />
+			<div th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Error</div>
+			
+			<div id="lab"></div>
+			<label for="postCode">Postinumero</label>
+			<input type="text" id="postCode" th:field="*{postCode}" />
+			<div th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}">Error</div>
+			
+			<div id="lab"></div>
 			<label for="city">Kaupunki</label>
 			<input type="text" id="city" th:field="*{city}" />
 			<p th:if="${#fields.hasErrors('city')}" th:errors="*{city}">email Error</p>	

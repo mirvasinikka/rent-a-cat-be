@@ -10,27 +10,35 @@ public class RegisterForm {
     private String username = "";
 
     @NotEmpty
-    @Size(min=3, max=10)
+    @Size(min=3, max=50)
     private String password = "";
 
     @NotEmpty
-    @Size(min=3, max=10)
+    @Size(min=3, max=50)
     private String passwordCheck = "";
     
     @NotEmpty
-    @Size(min=3, max=10)
+    @Size(min=3, max=20)
     private String city = "";
     
     @NotEmpty
+    @Size(min=3, max=50)
+    private String street = "";
+    
+    @NotEmpty
     @Size(min=3, max=10)
+    private String postCode = "";
+    
+    @NotEmpty
+    @Size(min=3, max=50)
     private String firstName = "";
     
     @NotEmpty
-    @Size(min=3, max=10)
+    @Size(min=3, max=50)
     private String lastName = "";
     
     @NotEmpty
-    @Size(min=3, max=20)
+    @Size(min=3, max=30)
     private String email = "";
 
     @NotEmpty
@@ -42,6 +50,32 @@ public class RegisterForm {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	
+	public String getStreet() {
+		return street;
+	}
+
+
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+
+
+	public String getPostCode() {
+		return postCode;
+	}
+
+
+
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+
+
 
 	public String getUsername() {
 		return username;

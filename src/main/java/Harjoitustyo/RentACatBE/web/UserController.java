@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import Harjoitustyo.RentACatBE.domain.Address;
+import Harjoitustyo.RentACatBE.domain.AddressRepository;
 import Harjoitustyo.RentACatBE.domain.RegisterForm;
 import Harjoitustyo.RentACatBE.domain.User;
 import Harjoitustyo.RentACatBE.domain.UserRepository;
@@ -17,6 +19,9 @@ import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
+	
+	@Autowired
+	private AddressRepository arepository;
 	
 	@Autowired
 	private UserRepository urepository;
@@ -41,13 +46,25 @@ public class UserController {
 		    	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 		    	String hashPwd = bc.encode(pwd);
 		    	
+
 		    	User newUser = new User();
+		    	Address userAddress = new Address(registerForm.getStreet(), registerForm.getCity(), registerForm.getPostCode());
+		    	
+		    	if (userAddress.getAddress_id() == null) {
+					arepository.save(userAddress);
+		    
+		    	}
+		    
 		    	newUser.setPassword(hashPwd);
 		    	newUser.setUsername(registerForm.getUsername());
-		    	newUser.setCity(registerForm.getCity());
 		    	newUser.setEmail(registerForm.getEmail());
 				newUser.setfName(registerForm.getFirstName());
 				newUser.setlName(registerForm.getLastName());
+				newUser.setAddress(userAddress);
+				
+	
+					
+				
 		    	newUser.setRole("USER");
 		    	
 		    	if (urepository.findByUsername(registerForm.getUsername()) == null) { 

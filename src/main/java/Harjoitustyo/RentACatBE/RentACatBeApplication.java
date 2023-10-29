@@ -34,8 +34,8 @@ public class RentACatBeApplication {
             repository.save(new Cat("Musti", "Persian", "Pekka", "naru", arepository.findByCity("Espoo").get(0)));
             repository.save(new Cat("Molla", "Thai Siamese", "Vilma", "Hiiri", arepository.findByCity("Vantaa").get(0)));
             
-            urepository.save(new User("user", "$2a$10$XPMxMF40UOfpo1jxytJ8g.B3uEA9VfqvqHa/WBqTI.HpUew3uzlEa", "USER", "Helsinki", "Mikko", "Mallikas", "mikko.mallika"));
-            urepository.save(new User("admin", "$2a$10$M8I15ZmXIBC2tFTBP/cdR.//tCZ51EXm34tA2/Q/xqyGL2HYyYY9i",  "ADMIN", "Vantaa","Malla", "Mollamaija", "malla.mollamaija"));
+            urepository.save(new User("user", "$2a$10$XPMxMF40UOfpo1jxytJ8g.B3uEA9VfqvqHa/WBqTI.HpUew3uzlEa", "USER", "Mikko", "Mallikas", "mikko.mallika", arepository.findByCity("Helsinki").get(0)));
+            urepository.save(new User("admin", "$2a$10$M8I15ZmXIBC2tFTBP/cdR.//tCZ51EXm34tA2/Q/xqyGL2HYyYY9i",  "ADMIN","Malla", "Mollamaija", "malla.mollamaija", arepository.findByCity("Vantaa").get(0)));
 
             
 			for (Cat cat : repository.findAll()) {
