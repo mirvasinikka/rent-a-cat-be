@@ -12,28 +12,115 @@
       th:href="@{/css/main.css}"
     />
     <title>Users</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h2 {
+        color: #333;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      a {
+        text-decoration: none;
+        color: #007bff;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .add,
+      .users {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 10px;
+      }
+      .add-button,
+      .users-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      .add-button:hover,
+      .users-button:hover {
+        background-color: #0056b3;
+      }
+      .navigation-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+      }
+
+      .logout form {
+        margin: 0;
+      }
+
+      .logout input[type="submit"] {
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      .user-role {
+        text-align: right;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h2>Users</h2>
+    <nav class="navigation-header">
+      <h1>List of Users</h1>
+      <div>
+        <div class="user-role">
+          <p>Welcome back <span sec:authentication="name"></span> ! </p>
+        </div>
+        <div class="logout">
+          <form class="from-button" th:action="@{/logout}" method="post">
+            <input type="submit" value="Log  out" />
+          </form>
+        </div>
+      </div>
+    </nav>
     <table>
       <tr>
-        <th>Käyttäjänimi</th>
-        <th>Rooli</th>
-        <th>Etunimi</th>
-        <th>Sukunimi</th>
-        <th>s.posti</th>
-        <th>Katu</th>
-        <th>Postinumero</th>
-        <th>Kaupunki</th>
-        <th>
-          <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Kirjaudu ulos" />
-          </form>
-        </th>
-        <th>
-          <p>Roolisi on:</p>
-          <span sec:authentication="name"></span>
-        </th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Street</th>
+        <th>Post code</th>
+        <th>City</th>
+        <th></th>
       </tr>
 
       <tr th:each="user : ${users}">
@@ -45,11 +132,26 @@
         <td th:text="${user.address.street}"></td>
         <td th:text="${user.address.postCode}"></td>
         <td th:text="${user.address.city}"></td>
-       
-        <td><a th:href="@{/deleteuser/{id}(id=${user.id})}">Delete</a></td>
+
+        <td sec:authorize="hasAuthority('ADMIN')">
+          <a th:href="@{/deleteuser/{id}(id=${user.id})}">Delete</a>
+        </td>
       </tr>
     </table>
-    <a class="register" href="/register">Add a user</a>
-    <a class="list" href="/list">Takaisin kissoihin</a>
+    <button
+      sec:authorize="hasAuthority('ADMIN')"
+      class="add-button"
+      onclick="location.href='/register'"
+    >
+      Add a User
+    </button>
+    <button
+      sec:authorize="hasAuthority('ADMIN')"
+      class="users-button"
+      onclick="location.href='/list'"
+    >
+      Back to Cats
+    </button>
+ 
   </body>
 </html>

@@ -1,8 +1,6 @@
 package Harjoitustyo.RentACatBE;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -34,31 +32,40 @@ public class RentACatBeApplication {
 			Address address2 = new Address("kuja", "Vantaa", "05550");
 			Address address3 = new Address("katu", "Espoo", "03330");
 
-			Cat cat1 = new Cat("Miri", "Scottish long hair", "Mirva", "pallo", address1);
-			Cat cat2 = new Cat("Musti", "Persian", "Pekka", "naru", address3);
-			Cat cat3 = new Cat("Molla", "Thai Siamese", "Vilma", "Hiiri", address2);
+	
 
-			User user1 = new User("user", "$2a$10$XPMxMF40UOfpo1jxytJ8g.B3uEA9VfqvqHa/WBqTI.HpUew3uzlEa", "USER", "Mikko", "Mallikas", "mikko.mallika", address1);
-			User user2 = new User("admin", "$2a$10$M8I15ZmXIBC2tFTBP/cdR.//tCZ51EXm34tA2/Q/xqyGL2HYyYY9i",  "ADMIN","Malla", "Mollamaija", "malla.mollamaija", address2);
+			User user1 = new User("user","mikko.mallika", "$2a$10$XPMxMF40UOfpo1jxytJ8g.B3uEA9VfqvqHa/WBqTI.HpUew3uzlEa", "USER", "Mikko", "Mallikas");
+			User user2 = new User("admin", "malla.mollamaija", "$2a$10$M8I15ZmXIBC2tFTBP/cdR.//tCZ51EXm34tA2/Q/xqyGL2HYyYY9i", "ADMIN","Malla", "Mollamaija");
 
-			List<Cat> catList = new ArrayList<Cat>();
-			List<User> userList = new ArrayList<User>();
-			
-		
-			addressRepository.save(address1);
+			user1.setAddress(address1);
+			user2.setAddress(address3);
+
+			userRepository.save(user1);
+            userRepository.save(user2);
+
+
+		    addressRepository.save(address1);
 			addressRepository.save(address2);
 			addressRepository.save(address3);
+
+			Cat cat1 = new Cat("Miri", "Scottish long hair", "pallo", true);
+			Cat cat2 = new Cat("Musti", "Persian", "naru", true);
+			Cat cat3 = new Cat("Molla", "Thai Siamese", "Hiiri", true);
+
+			cat1.setAddress(address1);
+			cat2.setAddress(address2);
+			cat3.setAddress(address3);
+
+			cat1.setUser(user1);
+			cat2.setUser(user2);
+			cat3.setUser(user1);
+			
 
 			catRepository.save(cat1);
             catRepository.save(cat2);
             catRepository.save(cat3);
             
-            userRepository.save(user1);
-            userRepository.save(user2);
             
-            catList.add(cat1);
-			userList.add(user1);
-	
 
             
 			for (Cat cat : catRepository.findAll()) {

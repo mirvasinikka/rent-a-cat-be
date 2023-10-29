@@ -8,54 +8,67 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <title>Register a user</title>
 </head>
 <body>
-	<div>
+	<div class="container">
 		<form th:object="${registerform}" th:action="@{/saveuser}" action="#" method="post">
 
-			<label for="username">Käyttäjätunnus</label>
+			<div class="form-group">
+			<label for="username">Username</label>
 			<input type="text" id="username" th:field="*{username}" />
 			<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
+			</div>
 			
-			<div id="lab"></div>
-			<label for="firstName">Etunimi</label>
-			<input type="text" id="ufirstName" th:field="*{firstName}" />
-			<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</p>	
+		
+			<div class="form-group"><label for="firstName">First name</label>
+				<input type="text" id="ufirstName" th:field="*{firstName}" />
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName Error</p>
+			</div>
+				
 			
-			<div id="lab"></div>
-			<label for="lastName">Sukunimi</label>
+			<div class="form-group">
+			<label for="lastName">Last name</label>
 			<input type="text" id="lastName" th:field="*{lastName}" />
 			<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName Error</p>	
-			
-			<div id="lab"></div>
-			<label for="email">Sähköposti</label>
+			</div>
+
+			<div class="form-group">
+			<label for="email">Email</label>
 			<input type="text" id="email" th:field="*{email}" />
 			<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</p>	
+			</div>
 			
-			<div id="lab"></div>
-			<label for="street">Osoite</label>
-			<input type="text" id="street" th:field="*{street}" />
-			<div th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Error</div>
-			
-			<div id="lab"></div>
-			<label for="postCode">Postinumero</label>
-			<input type="text" id="postCode" th:field="*{postCode}" />
-			<div th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}">Error</div>
-			
-			<div id="lab"></div>
-			<label for="city">Kaupunki</label>
-			<input type="text" id="city" th:field="*{city}" />
-			<p th:if="${#fields.hasErrors('city')}" th:errors="*{city}">email Error</p>	
-			
-			<div id="lab"></div>
-			<label for="password">Salasana</label>
-			<input type="text" id="password" th:field="*{password}" />
+			<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" id="password" th:field="*{password}" />
 			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</p>	
-			
-			<div id="lab"></div>
-			<label for="passwordCheck">Kirjoita salasana uudelleen</label>
-			<input type="text" id="passwordCheck" th:field="*{passwordCheck}" />
+			</div>
+
+			<div class="form-group">
+			<label for="passwordCheck">Rewrite password</label>
+			<input type="password" id="passwordCheck" th:field="*{passwordCheck}" />
 			<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">passwordCheck Error</p>	
+			</div>
+
+
+			<div class="form-group">
+			<label for="street">Street:</label>
+			<input type="text" id="street" th:field="*{address.street}" />
+			<span th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"></span>
+			</div>
+
+			<div class="form-group">
+			<label for="postCode">Postal Code:</label>
+			<input type="text" id="postCode" th:field="*{address.postCode}" />
+			<span th:if="${#fields.hasErrors('address.postCode')}" th:errors="*{address.postCode}"></span>
+			</div>
+
+			<div class="form-group">
+			<label for="city">City:</label>
+			<input type="text" id="city" th:field="*{address.city}" />
+			<span th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span>
+			</div>
+
 			
-			<input type="submit" class="btn btn-primary" value="register"></input>		
+			<input type="submit" class="btn" value="Register" ></input>		
 			
 		</form>	
 	</div>
