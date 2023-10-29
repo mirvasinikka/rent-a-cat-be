@@ -11,44 +11,45 @@
 	<div>
 		<form th:object="${cat}" th:action="@{/save}" action="#" method="post">
 			<input type="hidden" id="id" th:field="*{id}" />
-
-			<label for="name">Nimi</label>
+			<div class="form-group">
+			<label for="name">Name</label>
 			<input type="text" id="name" th:field="*{name}" />
 			<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+			</div>
 
-			<div id="lab"></div>
-			<label for="breed">Laji</label>
+			<div class="form-group">
+			<label for="breed">Breed</label>
 			<input type="text" id="breed" th:field="*{breed}" />
 			<div th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}">Error</div>
+			</div>
 
-			<div id="lab"></div>
-			<label for="owner">Omistaja</label>
-			<input type="text" id="owner" th:field="*{owner}" />
-			<div th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}">Error</div>
-
-			<div id="lab"></div>
-			<label for="toy">Lemilelu</label>
+			<div class="form-group">
+			<label for="toy">Favorite Toy</label>
 			<input type="text" id="toy" th:field="*{toy}" />
 			<div th:if="${#fields.hasErrors('toy')}" th:errors="*{toy}">Error</div>
+			</div>
 			
-		    <div id="lab"></div>
- 
-			<label for="street">Osoite</label>
+ 			<div class="form-group">
+			<label for="street">Street</label>
 			<input type="text" id="street" th:field="*{address.street}" />
 			<div th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}">Error</div>
+			</div>
 			
-			<div id="lab"></div>
-			<label for="postCode">Postinumero</label>
+			<div class="form-group">
+			<label for="postCode">Post code</label>
 			<input type="text" id="postCode" th:field="*{address.postCode}" />
 			<div th:if="${#fields.hasErrors('address.postCode')}" th:errors="*{address.postCode}">Error</div>
+			</div>
 			
-			<div id="lab"></div>
-			<label for="city">Kaupunki</label>
+			<div class="form-group">
+			<label for="city">City</label>
 			<input type="text" id="city" th:field="*{address.city}" />
 			<div th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}">Error</div>
+			</div>
 			
-			<div id="lab"></div>
+			<div class="form-group">
 			<input type="submit" value="Save"></input>
+			</div>
 		</form>
 	</div>
 </body>

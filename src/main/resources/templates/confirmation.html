@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/css/main.css"
+      th:href="@{/css/main.css}"
+    />
+    <title>Order Confirmation</title>
+  </head>
+  <body>
+  <h2>Order Confirmation</h2>
+  <p>Thanks for your renting</p>
+  
+  <button
+      class="users-button"
+      onclick="location.href='/list'"
+    >
+      Back to Cats
+    </button>
+  
+
+   <!--
+    TODO:
+   Show renting conirmation info
+   
+    <table>
+    
+      <tr>
+        <th>Kissan nimi</th>
+        <th>Käyttäjätunnus</th>
+        <th>Alkupäivä</th>
+        <th>Loppupäivä</th>
+      </tr>
+
+      <tr th:each="renting : ${rentingform}">
+        <td th:text="${renting.cat.name}"></td>
+        <td th:text="${renting.user.username}"></td>
+        <td th:text="${renting.rentalDate}"></td>
+        <td th:text="${renting.rentalDuration}"></td>
+      </tr>
+    </table> -->
+  </body>
+</html>

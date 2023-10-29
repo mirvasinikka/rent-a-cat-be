@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/css/main.css"
+      th:href="@{/css/main.css}"
+    />
+    <title>Login</title>
+  </head>
+  <body>
+    <form th:action="@{/login}" method="post">
+      <div class="container">
+        <h2>Login</h2>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" />
+        </div>
+        <input type="submit" class="from-button" value="Login" />
+      </div>
+    </form>
+
+    <form th:action="@{/register}" method="get">
+      <input type="submit" class="from-button" value="Register" />
+    </form>
+  </body>
+</html>

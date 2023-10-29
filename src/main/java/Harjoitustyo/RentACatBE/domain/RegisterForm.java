@@ -17,17 +17,6 @@ public class RegisterForm {
     @Size(min=3, max=50)
     private String passwordCheck = "";
     
-    @NotEmpty
-    @Size(min=3, max=20)
-    private String city = "";
-    
-    @NotEmpty
-    @Size(min=3, max=50)
-    private String street = "";
-    
-    @NotEmpty
-    @Size(min=3, max=10)
-    private String postCode = "";
     
     @NotEmpty
     @Size(min=3, max=50)
@@ -43,38 +32,13 @@ public class RegisterForm {
 
     @NotEmpty
     private String role = "USER";
-    
+
+	private Address address = new Address();
     
 
 	public RegisterForm() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-	
-	
-	public String getStreet() {
-		return street;
-	}
-
-
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-
-
-	public String getPostCode() {
-		return postCode;
-	}
-
-
-
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
-	}
-
 
 
 	public String getUsername() {
@@ -101,13 +65,6 @@ public class RegisterForm {
 		this.passwordCheck = passwordCheck;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -140,6 +97,20 @@ public class RegisterForm {
 	public void setRole(String role) {
 		this.role = role;
 	}
-    
 
+	public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+	@Override
+	public String toString() {
+		return "RegisterForm [username=" + username + ", password=" + password + ", passwordCheck=" + passwordCheck
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", role=" + role
+				+ ", address=" + address + "]";
+	}
+    
 }

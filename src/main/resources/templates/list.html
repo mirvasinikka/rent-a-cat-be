@@ -12,39 +12,76 @@
       th:href="@{/css/main.css}"
     />
     <title>Rent a Cat</title>
+    <style>
+     
+    </style>
   </head>
   <body>
-    <h2>List of cats</h2>
+    <nav class="navigation-header">
+      <h1>List of Cats</h1>
+      <div>
+        <div class="user-role">
+          <p>Welcome back <span sec:authentication="name"></span> ! </p>
+        </div>
+        <div class="logout">
+          <form class="from-button" th:action="@{/logout}" method="post">
+            <input type="submit" value="Log  out" />
+          </form>
+        </div>
+      </div>
+    </nav>
+
     <table>
       <tr>
-        <th>Nimi</th>
-        <th>Laji</th>
-        <th>Omistaja</th>
-        <th>Lempilelu</th>
-        <th>Kaupunki</th>
-        <th>Postinumero</th>
-        <th>Osoite</th>
-         <th> 
-        	<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Kirjaudu ulos"/></form> 
-		</th>
-		<th> <p> Roolisi on: </p><span sec:authentication="name"></span> </th>
+        <th>Cat Name</th>
+        <th>Breed</th>
+        <th>Available</th>
+        <th>Favorite Toy</th>
+        <th>Owner</th>
+        <th>City</th>
+        <th>Post Code</th>
+        <th>Street</th>
+        <th></th>
+        <th sec:authorize="hasAuthority('ADMIN')"></th>
+        <th sec:authorize="hasAuthority('ADMIN')"></th>
       </tr>
 
       <tr th:each="cat : ${cats}">
         <td th:text="${cat.name}"></td>
         <td th:text="${cat.breed}"></td>
-        <td th:text="${cat.owner}"></td>
+        <td th:text="${cat.available}"></td>
         <td th:text="${cat.toy}"></td>
-        <td th:text="${cat.address.city}"></td>  
-         <td th:text="${cat.address.postCode}"></td>
-          <td th:text="${cat.address.street}"></td>     
+        <td th:text="${cat.user.username}"></td>
+        <td th:text="${cat.address.city}"></td>
+        <td th:text="${cat.address.postCode}"></td>
+        <td th:text="${cat.address.street}"></td>
 
-        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${cat.id})}">Delete</a></td>
-        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${cat.id})}">Edit</a></td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+          <a th:href="@{/delete/{id}(id=${cat.id})}">Delete</a>
+        </td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+          <a th:href="@{/edit/{id}(id=${cat.id})}">Edit</a>
+        </td>
+        <td>
+          <a th:href="@{'/rent?catId=' + ${cat.id}}" class="rent-button"
+            >Rent this cat</a
+          >
+        </td>
       </tr>
     </table>
-    <a sec:authorize="hasAuthority('ADMIN')" class="add" href="/add">Add a Cat</a>
-    <a sec:authorize="hasAuthority('ADMIN')"  class="users" href="/users">Käyttäjälista</a>
+    <button
+      sec:authorize="hasAuthority('ADMIN')"
+      class="add-button"
+      onclick="location.href='/add'"
+    >
+      Add a Cat
+    </button>
+    <button
+      sec:authorize="hasAuthority('ADMIN')"
+      class="users-button"
+      onclick="location.href='/users'"
+    >
+      List of users
+    </button>
   </body>
 </html>

@@ -1,6 +1,8 @@
 package Harjoitustyo.RentACatBE;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,29 +16,39 @@ import Harjoitustyo.RentACatBE.web.UserDetailServiceImpl;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
-public class WebSecurityConfig {
+public class WebSecurityConfig  {
 	@Autowired
 	private UserDetailServiceImpl userDetailsService;
 	
 	@Bean
-	protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
+	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+		
 		http
-		.authorizeHttpRequests( authorize -> authorize
+		.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers(antMatcher("/css/**")).permitAll()
+				.requestMatchers(antMatcher("/register")).permitAll()
+				.requestMatchers(antMatcher("/saveuser")).permitAll()
 				.anyRequest().authenticated()
 		)
-		.formLogin( formlogin -> formlogin
-			.defaultSuccessUrl("/list", true)
-			.permitAll()
+		.headers(headers -> headers
+				.frameOptions(frameoptions -> 
+				frameoptions.disable() //for h2 console			
+			    )
 		)
-		.logout( logout -> logout
+		.formLogin(formlogin -> formlogin
+				.loginPage("/login")
+				.defaultSuccessUrl("/list", true)
+				.permitAll()
+		)
+		.logout(logout -> logout
 				.permitAll()
 		);
+				
 		return http.build();
-		}
-	
+	}
+
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-	}
-	
-}
+	}}

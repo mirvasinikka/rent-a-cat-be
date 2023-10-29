@@ -10,19 +10,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="Addresses")
 public class Address {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long address_id;
 	
     private String street;
-    
-
     private String city;
-    
     private String postCode;
     
     @JsonIgnore
@@ -36,7 +35,6 @@ public class Address {
     
 	public Address() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -94,5 +92,4 @@ public class Address {
 	}
     
     
-	
 }
