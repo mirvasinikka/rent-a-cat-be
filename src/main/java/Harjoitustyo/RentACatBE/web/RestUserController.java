@@ -1,0 +1,56 @@
+package Harjoitustyo.RentACatBE.web;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import Harjoitustyo.RentACatBE.domain.User;
+import Harjoitustyo.RentACatBE.domain.UserRepository;
+
+@RestController
+public class RestUserController {
+	
+	@Autowired
+	private UserRepository repository;
+	
+	@GetMapping("/userlist") 
+	public List<User> restUserList() {
+		return (List<User>) repository.findAll();
+	}
+
+	@GetMapping("/userlist/{id}")
+	public Optional<User> restFindUser(@PathVariable("id") Long id) {
+	return repository.findById(id);
+	}
+	
+	@PostMapping ("/userlist")
+	User newUser(@RequestBody User newUser) {
+		return repository.save(newUser);
+	}
+	
+	@PutMapping("/userlist/{id}")
+	User editUser(@RequestBody User editedUser, @PathVariable Long id) {
+		editedUser.setId(id);
+		return repository.save(editedUser);
+	}
+
+	@DeleteMapping("/userlist/{id}")
+	public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+	    if (repository.existsById(id)) {
+	        repository.deleteById(id);
+	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	}
+}
