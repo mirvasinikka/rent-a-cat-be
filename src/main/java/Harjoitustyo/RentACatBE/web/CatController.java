@@ -17,8 +17,8 @@ import Harjoitustyo.RentACatBE.domain.Address;
 import Harjoitustyo.RentACatBE.domain.AddressRepository;
 import Harjoitustyo.RentACatBE.domain.Cat;
 import Harjoitustyo.RentACatBE.domain.CatRepository;
-import Harjoitustyo.RentACatBE.domain.User;
-import Harjoitustyo.RentACatBE.domain.UserRepository;
+import Harjoitustyo.RentACatBE.domain.AppUser;
+import Harjoitustyo.RentACatBE.domain.AppUserRepository;
 import jakarta.validation.Valid;
 
 @Controller
@@ -31,7 +31,7 @@ public class CatController {
     private AddressRepository addressRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private AppUserRepository userRepository;
     
     @RequestMapping(value="/login")
     public String login() {	
@@ -79,7 +79,7 @@ public class CatController {
 
             if (principal != null) {
                 String username = principal.getName();
-                User user = userRepository.findByUsername(username);
+                AppUser user = userRepository.findByUsername(username);
 
                 cat.setUser(user);
                 catRepository.save(cat);

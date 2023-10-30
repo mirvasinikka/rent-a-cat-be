@@ -21,7 +21,7 @@ public class Renting {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user; 
+	private AppUser user; 
 
 	@ManyToOne
 	@JoinColumn(name = "cat_id")
@@ -36,7 +36,7 @@ public class Renting {
 		super();
 	}
 	
-	public Renting(User user, Cat cat, Date rentalDate, int rentalDuration) {
+	public Renting(AppUser user, Cat cat, Date rentalDate, int rentalDuration) {
 		super();
 		this.user = user;
 		this.cat = cat;
@@ -49,11 +49,11 @@ public class Renting {
         return renting_id;
     }
 
-    public User getUser() {
+    public AppUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(AppUser user) {
         this.user = user;
     }
 

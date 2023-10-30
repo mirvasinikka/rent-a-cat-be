@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import Harjoitustyo.RentACatBE.domain.RegisterForm;
-import Harjoitustyo.RentACatBE.domain.User;
-import Harjoitustyo.RentACatBE.domain.UserRepository;
+import Harjoitustyo.RentACatBE.domain.AppUser;
+import Harjoitustyo.RentACatBE.domain.AppUserRepository;
 import jakarta.validation.Valid;
 
 @Controller
-public class UserController {
+public class AppUserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private AppUserRepository userRepository;
 
     @GetMapping("/users")
     public String userList(Model model) {
@@ -51,7 +51,7 @@ public class UserController {
                     BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
                     String hashPwd = bc.encode(pwd);
 
-                    User newUser = new User(
+                    AppUser newUser = new AppUser(
                             registerForm.getUsername(),
                             registerForm.getEmail(),
                             hashPwd,
@@ -85,7 +85,7 @@ public class UserController {
     @GetMapping("/deleteuser/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         try {
-            User userToDelete = userRepository.findById(id).orElse(null);
+            AppUser userToDelete = userRepository.findById(id).orElse(null);
             if (userToDelete != null) {
                 userRepository.delete(userToDelete);
             }

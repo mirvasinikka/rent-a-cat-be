@@ -19,8 +19,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="Users")
-public class User {
+@Table(name="AppUser")
+public class AppUser {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,12 +58,12 @@ public class User {
 
 	
 
-	public User() {
+	public AppUser() {
 		super();
 	}
 	
 
-	public User(String username,  String email, String password, String role, String fName, String lName) {
+	public AppUser(String username,  String email, String password, String role, String fName, String lName) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -77,6 +77,10 @@ public class User {
 
     public Long getId() {
         return user_id;
+    }
+
+    public void setId(Long id) {
+        this.user_id = id;
     }
 
     public String getUsername() {
@@ -146,7 +150,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", role=" + role
+		return "AppUser [username=" + username + ", password=" + password + ", role=" + role
 				+ ", fName=" + fName + ", lName=" + lName + ", email=" + email + "]";
 	}
 

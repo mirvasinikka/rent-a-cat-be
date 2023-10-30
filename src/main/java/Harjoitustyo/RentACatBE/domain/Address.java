@@ -30,7 +30,7 @@ public class Address {
     
     @JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
-	private List<User> users;
+	private List<AppUser> users;
     
     
 	public Address() {
