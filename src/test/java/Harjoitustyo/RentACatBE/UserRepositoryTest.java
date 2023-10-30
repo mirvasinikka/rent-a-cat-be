@@ -12,8 +12,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import Harjoitustyo.RentACatBE.domain.User;
-import Harjoitustyo.RentACatBE.domain.UserRepository;
+import Harjoitustyo.RentACatBE.domain.AppUser;
+import Harjoitustyo.RentACatBE.domain.AppUserRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -31,7 +31,7 @@ public class UserRepositoryTest {
 	    private MockMvc mockMvc;
 	    
 	    @Autowired
-	    private UserRepository userRepository; 
+	    private AppUserRepository userRepository; 
 
 	    @BeforeEach
 	    public void setUp() {
@@ -75,7 +75,7 @@ public class UserRepositoryTest {
 	                .param("postCode", "12345"))
 	        		.andExpect(MockMvcResultMatchers.redirectedUrl("/list"));
 
-	        User savedUser = userRepository.findByUsername(username);
+	        AppUser savedUser = userRepository.findByUsername(username);
 	        assertNotNull(savedUser);
 	        assertEquals(username, savedUser.getUsername());
 	    }

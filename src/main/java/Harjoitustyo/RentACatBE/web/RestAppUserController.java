@@ -14,32 +14,32 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import Harjoitustyo.RentACatBE.domain.User;
-import Harjoitustyo.RentACatBE.domain.UserRepository;
+import Harjoitustyo.RentACatBE.domain.AppUser;
+import Harjoitustyo.RentACatBE.domain.AppUserRepository;
 
 @RestController
-public class RestUserController {
+public class RestAppUserController {
 	
 	@Autowired
-	private UserRepository repository;
+	private AppUserRepository repository;
 	
 	@GetMapping("/userlist") 
-	public List<User> restUserList() {
-		return (List<User>) repository.findAll();
+	public List<AppUser> restUserList() {
+		return (List<AppUser>) repository.findAll();
 	}
 
 	@GetMapping("/userlist/{id}")
-	public Optional<User> restFindUser(@PathVariable("id") Long id) {
+	public Optional<AppUser> restFindUser(@PathVariable("id") Long id) {
 	return repository.findById(id);
 	}
 	
 	@PostMapping ("/userlist")
-	User newUser(@RequestBody User newUser) {
+	AppUser newUser(@RequestBody AppUser newUser) {
 		return repository.save(newUser);
 	}
 	
 	@PutMapping("/userlist/{id}")
-	User editUser(@RequestBody User editedUser, @PathVariable Long id) {
+	AppUser editUser(@RequestBody AppUser editedUser, @PathVariable Long id) {
 		editedUser.setId(id);
 		return repository.save(editedUser);
 	}

@@ -40,7 +40,7 @@ public class Cat {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
+	private AppUser user;
 
 
 	@ManyToOne
@@ -65,7 +65,7 @@ public class Cat {
 		this.available = available;
 	}
 
-	public Cat(String name, String breed, String toy, boolean available,  User user) {
+	public Cat(String name, String breed, String toy, boolean available,  AppUser user) {
         this.name = name;
         this.breed = breed;
 	    this.toy = toy;
@@ -124,11 +124,11 @@ public class Cat {
 		this.toy = toy;
 	}
 
-	public User getUser() {
+	public AppUser getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(AppUser user) {
 		this.user = user;
 	}
 

@@ -16,8 +16,8 @@ import Harjoitustyo.RentACatBE.domain.CatRepository;
 import Harjoitustyo.RentACatBE.domain.Renting;
 import Harjoitustyo.RentACatBE.domain.RentingForm;
 import Harjoitustyo.RentACatBE.domain.RentingRepository;
-import Harjoitustyo.RentACatBE.domain.User;
-import Harjoitustyo.RentACatBE.domain.UserRepository;
+import Harjoitustyo.RentACatBE.domain.AppUser;
+import Harjoitustyo.RentACatBE.domain.AppUserRepository;
 import jakarta.validation.Valid;
 
 @Controller
@@ -30,7 +30,7 @@ public class RentingController {
 	private RentingRepository rentingRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private AppUserRepository userRepository;
 	
 
 	@GetMapping("/rent")
@@ -73,7 +73,7 @@ public class RentingController {
     	
        if (principal != null) {
         String username = principal.getName();
-        User user = userRepository.findByUsername(username);
+        AppUser user = userRepository.findByUsername(username);
         
         cat.setUser(user);
         catRepository.save(cat);
