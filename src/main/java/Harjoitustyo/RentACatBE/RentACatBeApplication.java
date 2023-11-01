@@ -27,7 +27,9 @@ public class RentACatBeApplication {
 	@Bean
 	public CommandLineRunner listOfCats(CatRepository catRepository, AddressRepository addressRepository, AppUserRepository userRepository) {
 		return (args) -> {
-
+			/*
+			 * 
+			
 			Address address1 = new Address("katu", "Helsinki", "00940");
 			Address address2 = new Address("kuja", "Vantaa", "05550");
 			Address address3 = new Address("katu", "Espoo", "03330");
@@ -65,7 +67,7 @@ public class RentACatBeApplication {
             catRepository.save(cat2);
             catRepository.save(cat3);
             
-            
+             */
 
             
 			for (Cat cat : catRepository.findAll()) {
