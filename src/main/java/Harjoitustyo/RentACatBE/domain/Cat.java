@@ -19,8 +19,8 @@ import jakarta.validation.constraints.Size;
 public class Cat {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long cat_id;
 	
 	@NotBlank( message = "Please provide cats name")
 	@Size (min=2, max=10)
@@ -75,11 +75,11 @@ public class Cat {
 
 
 	public Long getId() {
-		return id;
+		return cat_id;
 	}
 
-  	public void setId(Long id) {
-        this.id = id;
+  	public void setId(Long cat_id) {
+        this.cat_id = cat_id;
     }
 
 	  public String getName() {
@@ -136,7 +136,7 @@ public class Cat {
 	 @Override
     public String toString() {
         return "Cat{" +
-                "id=" + id +
+                "cat_id=" + cat_id +
                 ", name='" + name + '\'' +
                 ", breed='" + breed + '\'' +
 				", toy='" + toy + '\'' +
