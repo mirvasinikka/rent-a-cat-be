@@ -30,7 +30,6 @@ public class Cat {
 	@Size (min=3, max=30)
 	private String breed;
 
-	private boolean available = true;
 	
 
 	@NotBlank(message = "Please tell us the cats favourite toy")
@@ -57,19 +56,18 @@ public class Cat {
 	}
 
 
-	public Cat(String name, String breed, String toy, boolean available) {
+	public Cat(String name, String breed, String toy) {
 		super();
 		this.name = name;
 		this.breed = breed;
 		this.toy = toy;
-		this.available = available;
+
 	}
 
-	public Cat(String name, String breed, String toy, boolean available,  AppUser user) {
+	public Cat(String name, String breed, String toy,  AppUser user) {
         this.name = name;
         this.breed = breed;
 	    this.toy = toy;
-        this.available = available;
         this.user = user;
     }
 
@@ -96,15 +94,6 @@ public class Cat {
 
     public void setBreed(String breed) {
         this.breed = breed;
-    }
-
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 
 	public Address getAddress() {
@@ -140,7 +129,6 @@ public class Cat {
                 ", name='" + name + '\'' +
                 ", breed='" + breed + '\'' +
 				", toy='" + toy + '\'' +
-                ", available=" + available +
 				", user=" + user +
 				", city=" + address.getCity() +
                 '}';
