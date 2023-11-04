@@ -18,6 +18,7 @@
     <h2>Rent a Cat</h2>
     <form th:action="@{/rent}" method="post" th:object="${rentingForm}">
       <div>
+         <label for="catName">Cat name:</label>
         <p th:text="${selectedCat.name}"></p>
         <input
           type="hidden"

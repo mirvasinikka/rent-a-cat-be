@@ -61,26 +61,24 @@ public class RentingController {
 	
 
 	@PostMapping("/rent")
-	public String processRentingForm(@Valid @ModelAttribute("rentingForm") RentingForm rentingForm, Model model,  Principal principal) {
+	public String processRentingForm(@Valid @ModelAttribute("rentingForm") RentingForm rentingForm, Model model, Principal principal) {
 
     Long catId = rentingForm.getCatId();
     Date rentalDate = new Date();
     int rentalDuration = rentingForm.getRentalDuration();
 
     Cat cat = catRepository.findById(catId).orElse(null);
+    
 
     try {
-    	
-       if (principal != null) {
+ 
+    if (cat != null && principal != null) {
         String username = principal.getName();
         AppUser user = userRepository.findByUsername(username);
-        
+
         cat.setUser(user);
         catRepository.save(cat);
-    }
-
-    if (cat != null ) {
-        
+  
         Renting renting = new Renting();
         renting.setCat(cat);
         renting.setRentalDate(rentalDate);
@@ -92,6 +90,12 @@ public class RentingController {
 
         model.addAttribute("successMessage", "Cat rented successfully!");
 
+        model.addAttribute("cat", cat);
+        model.addAttribute("user", user);
+        model.addAttribute("renting", renting);
+
+
+  
         return "confirmation";
     } else {
         
