@@ -68,18 +68,17 @@ public class CatController {
         }
     }
 
-
-    @GetMapping("/add")
+    @GetMapping("/addCat")
     public String addCat(Model model) {
         model.addAttribute("cat", new Cat());
-        return "add";
+        return "addCat";
     }
 
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute("cat") Cat cat, BindingResult bindingResult, Model model, Principal principal, @RequestParam("imageFile") MultipartFile imageFile) {
         try {
             if (bindingResult.hasErrors()) {
-                return "edit";
+                return "editCat";
             }
 
             Address address = cat.getAddress();
@@ -117,14 +116,14 @@ public class CatController {
     public String deleteCat(@PathVariable("id") Long id) {
         try {
             catRepository.deleteById(id);
-            return "redirect:/";
+            return "redirect:/catList";
         } catch (Exception e) {
         
             return "errorpage";
         }
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/editCat/{id}")
     public String editCat(@PathVariable("id") Long id, Model model) {
         try {
             Cat cat = catRepository.findById(id).orElse(new Cat());
@@ -138,7 +137,7 @@ public class CatController {
 
             model.addAttribute("cat", cat);
             model.addAttribute("address", cat.getAddress());
-            return "edit";
+            return "editCat";
         } catch (Exception e) {
             model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
             return "errorpage";

@@ -34,10 +34,10 @@ public class AppUserController {
         }
     }
 
-    @GetMapping("/register")
+    @GetMapping("/registerUser")
     public String addUser(Model model) {
         model.addAttribute("registerform", new RegisterForm());
-        return "register";
+        return "registerUser";
     }
 
     @PostMapping("/saveuser")
@@ -66,14 +66,14 @@ public class AppUserController {
                         userRepository.save(newUser);
                     } else {
                         bindingResult.rejectValue("username", "err.username", "Username already exists // Käyttäjätunnus on jo olemassa");
-                        return "register";
+                        return "registerUser";
                     }
                 } else {
                     bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords do not match // Salasanat eivät täsmää");
-                    return "register";
+                    return "registerUser";
                 }
             } else {
-                return "register";
+                return "registerUser";
             }
             return "redirect:/users";
         } catch (Exception e) {
