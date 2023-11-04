@@ -1,6 +1,7 @@
 package Harjoitustyo.RentACatBE;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -8,12 +9,14 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import Harjoitustyo.RentACatBE.domain.Cat;
 import Harjoitustyo.RentACatBE.domain.CatRepository;
 
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CatRepositoryTest {
 	
 	@Autowired
@@ -22,8 +25,18 @@ public class CatRepositoryTest {
     @Test
     void saveCat() {
         Cat cat = new Cat();
+        cat.setName("Mau");
+        cat.setBreed("Persian");
+        cat.setToy("String");
+
         Cat savedCat = catRepository.save(cat);
-        assertThat(savedCat).isNotNull();
+        assertNotNull(savedCat);
+
+        assertThat(savedCat.getId()).isNotNull();
+        assertThat(savedCat.getName()).isEqualTo("Mau");
+        assertThat(savedCat.getBreed()).isEqualTo("Persian");
+        assertThat(savedCat.getToy()).isEqualTo("String");
+
     }
 
     @Test
@@ -46,11 +59,11 @@ public class CatRepositoryTest {
         assertTrue(optionalCat.isPresent());
         
         Cat cat = optionalCat.get();
-        cat.setName("musti");
+        cat.setName("testi");
 
         catRepository.save(cat);
         
-        List<Cat> updatedCats = catRepository.findByName("musti");
+        List<Cat> updatedCats = catRepository.findByName("testi");
         assertThat(updatedCats).hasSize(1);
     }
 
