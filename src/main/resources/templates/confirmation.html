@@ -8,42 +8,56 @@
     <link
       type="text/css"
       rel="stylesheet"
-      href="/css/main.css"
-      th:href="@{/css/main.css}"
+      href="/css/confirmation.css"
+      th:href="@{/css/confirmation.css}"
     />
-    <title>Order Confirmation</title>
+    <title>Rental Confirmation</title>
   </head>
   <body>
-  <h2>Order Confirmation</h2>
-  <p>Thanks for your renting</p>
-  
-  <button
-      class="users-button"
-      onclick="location.href='/list'"
-    >
+    <h2>Rental Confirmation</h2>
+    <div th:if="${user != null}">
+      <h3>
+        Thanks <span class="extra" th:text="${user.fName}"></span> for renting
+        <span class="extra" th:text="${cat.name}"></span> the cat!
+      </h3>
+      <h4>Check order infomation below!</h4>
+    </div>
+    <h4>Cat info</h4>
+    <div th:if="${cat != null}">
+      <p>Cat Name: <span th:text="${cat.name}"></span></p>
+      <p>Breed: <span th:text="${cat.breed}"></span></p>
+      <p>Favorite Toy: <span th:text="${cat.toy}"></span></p>
+      <p>Address: 
+        <span th:text="${cat.address.street}"></span>
+         <span th:text="${cat.address.postCode}"></span>
+          <span th:text="${cat.address.city}"></span>
+      </p>
+    </div>
+    <h4>Rental info</h4>
+
+    <div th:if="${renting != null}">
+      <p>Starting date: <span th:text="${renting.rentalDate}"></span></p>
+      <p>Rental Duration: <span th:text="${renting.rentalDuration}"></span></p>
+    </div>
+    <h4>Your info</h4>
+    <div th:if="${user != null}">
+      <p>Username: <span th:text="${user.username}"></span></p>
+      <p>First name: <span th:text="${user.fName}"></span></p>
+      <p>Last name: <span th:text="${user.lName}"></span></p>
+      <p>Email: <span th:text="${user.email}"></span></p>
+      <p>Address: 
+        <span th:text="${user.address.street}"></span>
+         <span th:text="${user.address.postCode}"></span>
+          <span th:text="${user.address.city}"></span>
+      </p>
+    </div>
+
+    <div th:if="${successMessage}" class="success-message">
+      <p th:text="${successMessage}"></p>
+    </div>
+
+    <button class="users-button" onclick="location.href='/list'">
       Back to Cats
     </button>
-  
-
-   <!--
-    TODO:
-   Show renting conirmation info
-   
-    <table>
-    
-      <tr>
-        <th>Kissan nimi</th>
-        <th>Käyttäjätunnus</th>
-        <th>Alkupäivä</th>
-        <th>Loppupäivä</th>
-      </tr>
-
-      <tr th:each="renting : ${rentingform}">
-        <td th:text="${renting.cat.name}"></td>
-        <td th:text="${renting.user.username}"></td>
-        <td th:text="${renting.rentalDate}"></td>
-        <td th:text="${renting.rentalDuration}"></td>
-      </tr>
-    </table> -->
   </body>
 </html>
