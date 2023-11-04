@@ -83,6 +83,7 @@ public class RentingController {
         renting.setCat(cat);
         renting.setRentalDate(rentalDate);
         renting.setRentalDuration(rentalDuration);
+        renting.setUser(user);
 
         rentingRepository.save(renting);
 
