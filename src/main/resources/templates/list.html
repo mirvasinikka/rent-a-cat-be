@@ -33,7 +33,6 @@
       <tr>
         <th>Cat Name</th>
         <th>Breed</th>
-        <th>Available</th>
         <th>Favorite Toy</th>
         <th>Owner</th>
         <th>City</th>
@@ -47,7 +46,6 @@
       <tr th:each="cat : ${cats}">
         <td th:text="${cat.name}"></td>
         <td th:text="${cat.breed}"></td>
-        <td th:text="${cat.available}"></td>
         <td th:text="${cat.toy}"></td>
         <td th:text="${cat.user.username}"></td>
         <td th:text="${cat.address.city}"></td>

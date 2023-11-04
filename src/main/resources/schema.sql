@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS cats
 , name VARCHAR(50) NOT NULL
 , breed VARCHAR(50) NOT NULL
 , toy VARCHAR(50) NOT NULL
-, available BOOLEAN
 , address_id BIGINT
 , user_id BIGINT
 , FOREIGN KEY (address_id) REFERENCES addresses(address_id)
