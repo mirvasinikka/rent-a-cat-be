@@ -100,7 +100,7 @@ public class RentingController {
 
 
   
-        return "confirmation";
+        return "rentalConfirmation";
     } else {
         
         model.addAttribute("errorMessage", "Sorry, this cat is not available for rent.");

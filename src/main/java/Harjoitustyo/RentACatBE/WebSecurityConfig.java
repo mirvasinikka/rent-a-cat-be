@@ -26,7 +26,7 @@ public class WebSecurityConfig  {
 		http
 		.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers(antMatcher("/css/**")).permitAll()
-				.requestMatchers(antMatcher("/register")).permitAll()
+				.requestMatchers(antMatcher("/registerUser")).permitAll()
 				.requestMatchers(antMatcher("/saveuser")).permitAll()
 				.anyRequest().authenticated()
 		)
