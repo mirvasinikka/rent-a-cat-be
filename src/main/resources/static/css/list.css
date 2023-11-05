@@ -1,0 +1,163 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+.top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  z-index: 3;
+}
+
+.user-role {
+  margin: 0;
+}
+
+.top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 30px;
+  margin-top: 10px;
+}
+
+.user-role p {
+  margin: 0;
+}
+
+.logout-form {
+  display: inline;
+}
+
+.logout-form input[type="submit"] {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.logout-form input[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+.cat-card {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 20px 10px;
+  width: 300px;
+  padding: 10px;
+  text-align: center;
+}
+
+.cat-card img {
+  max-width: 300px;
+  max-height: 400px;
+}
+
+.cat-card h2 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.cat-card p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.cat-card a {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
+}
+
+.cat-card a:hover {
+  background-color: #2980b9;
+}
+
+.bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  text-align: center;
+  padding: 15px;
+  z-index: 2;
+}
+
+.add-button,
+.users-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin: 10px;
+}
+
+.add-button:hover,
+.users-button:hover {
+  background-color: #2980b9;
+}
+
+a.delete {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a.delete:hover {
+  background-color: #c0392b;
+}
+
+a.rent-button {
+  background-color: #0377fc;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a.rent-button:hover {
+  background-color: #174f8f;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 150px;
+  gap: 15px;
+}

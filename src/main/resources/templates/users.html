@@ -101,10 +101,10 @@
       <h1>List of Users</h1>
       <div>
         <div class="user-role">
-          <p>Welcome back <span sec:authentication="name"></span> ! </p>
+          <p>Welcome back <span sec:authentication="name"></span> !</p>
         </div>
         <div class="logout">
-          <form class="from-button" th:action="@{/logout}" method="post">
+          <form class="form-button" th:action="@{/logout}" method="post">
             <input type="submit" value="Log  out" />
           </form>
         </div>
@@ -152,6 +152,5 @@
     >
       Back to Cats
     </button>
- 
   </body>
 </html>

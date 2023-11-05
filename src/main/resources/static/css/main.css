@@ -4,9 +4,10 @@
 }
 .form-group {
   margin-bottom: 20px;
+  text-align: center;
 }
 
-.from-button {
+.form-button {
   background-color: #007bff;
   padding: 10px 20px;
   text-decoration: none;

@@ -3,14 +3,17 @@ package Harjoitustyo.RentACatBE.domain;
 
 import java.util.List;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -30,7 +33,13 @@ public class Cat {
 	@Size (min=3, max=30)
 	private String breed;
 
-	
+	@Lob
+	@Column(name = "image")
+	private byte[] image;
+
+    @Transient
+    private String base64Image;
+
 
 	@NotBlank(message = "Please tell us the cats favourite toy")
 	@Size (min=2, max=20)
@@ -56,19 +65,20 @@ public class Cat {
 	}
 
 
-	public Cat(String name, String breed, String toy) {
+	public Cat(String name, String breed, String toy, byte[] image) {
 		super();
 		this.name = name;
 		this.breed = breed;
 		this.toy = toy;
-
+		this.image = image;
 	}
 
-	public Cat(String name, String breed, String toy,  AppUser user) {
+	public Cat(String name, String breed, String toy, AppUser user, byte[] image) {
         this.name = name;
         this.breed = breed;
 	    this.toy = toy;
         this.user = user;
+		this.image = image;
     }
 
 
@@ -121,20 +131,26 @@ public class Cat {
 		this.user = user;
 	}
 
+	public byte[] getImage() {
+		return image;
+	}	
 
-	 @Override
-    public String toString() {
-        return "Cat{" +
-                "cat_id=" + cat_id +
-                ", name='" + name + '\'' +
-                ", breed='" + breed + '\'' +
-				", toy='" + toy + '\'' +
-				", user=" + user +
-				", city=" + address.getCity() +
-                '}';
-    }
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
+	public String getBase64Image() {
+		return base64Image;
+	}
+ 
+	public void setBase64Image(String base64Image) {
+		this.base64Image = base64Image;
+	}
 
-	
-
+	@Override
+	public String toString() {
+		return "Cat [cat_id=" + cat_id + ", name=" + name + ", breed=" + breed + ", toy=" + toy + ", user=" + user
+				+ ", address=" + address + ", rentings=" + rentings + ", image=" + image + ", base64Image="
+				+ base64Image + "]";
+	}
 }
