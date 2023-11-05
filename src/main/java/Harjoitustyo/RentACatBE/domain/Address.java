@@ -24,11 +24,11 @@ public class Address {
     private Long address_id;
 	
 	@NotNull(message = "Street is required")
-	@Size(min=5, max=255, message = "Street must be at least 5 characters")
+	@Size(min=5, max=50, message = "Street must be at least 5 characters")
     private String street;
 
 	@NotNull(message = "City is required")
-	@Size(min=5, max=100, message = "City must be at least 5 characters")
+	@Size(min=5, max=50, message = "City must be at least 5 characters")
     private String city;
 
 	@NotNull(message = "Post code is required")

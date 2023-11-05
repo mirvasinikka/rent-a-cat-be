@@ -14,12 +14,12 @@ INSERT INTO app_user  (username, email, password, role, f_name , l_name , addres
 
 
 INSERT INTO cats (name, breed, toy, address_id, user_id, image) VALUES
-("Miri", "Scottish long hair", "pallo", 1, 1, null),
-("Musti", "Persian", "naru",  2, 1, null),
-("Molla", "Thai Siamese", "Hiiri", 3, 1, null),
-("Maukka", "Scottish fold", "pallo", 1, 1, null),
-("Maukku", "Persian", "naru",  2, 1, null),
-("Maukki", "Thai Siamese", "Hiiri", 3, 1, null);
+("Miri", "Scottish long hair", "pallo", 1, 4, null),
+("Musti", "Persian", "naru",  2, 3, null),
+("Molla", "Thai Siamese", "Hiiri", 3, 5, null),
+("Maukka", "Scottish fold", "pallo", 1, 6, null),
+("Maukku", "Persian", "naru",  2, 5, null),
+("Maukki", "Thai Siamese", "Hiiri", 3, 6, null);
 
 
 INSERT INTO renting (rental_date, rental_duration, user_id, cat_id) VALUES

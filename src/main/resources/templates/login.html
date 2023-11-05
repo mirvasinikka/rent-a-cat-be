@@ -14,6 +14,7 @@
     <title>Login</title>
   </head>
   <body>
+    <div class="master">
     <form th:action="@{/login}" method="post">
       <div class="container">
         <h2>Login</h2>
@@ -28,8 +29,9 @@
       </div>
       <input type="submit" class="from-button" value="Login" />
     </form>
-    <form th:action="@{/registerUser}" method="get">
+    <form th:action="@{/registerUser}" method="get" class="for-no-margin">
       <input type="submit" class="from-button" value="Register" />
     </form>
+    </div>
   </body>
 </html>

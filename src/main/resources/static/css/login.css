@@ -102,3 +102,12 @@ body {
     width: 200px;
     height: 300px;
 }
+
+.master {
+    display: flex;
+    flex-direction: column;
+}
+
+.for-no-margin {
+    margin: 0;
+}
