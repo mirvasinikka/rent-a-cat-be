@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/css/main.css"
+      th:href="@{/css/main.css}"
+    />
+    <title>Edit Renting</title>
+  </head>
+  <body>
+    <nav class="navigation-header">
+      <h1>Edit Renting</h1>
+      <div>
+        <div class="user-role">
+          <p>Welcome back <span sec:authentication="name"></span> !</p>
+        </div>
+        <div class="logout">
+          <form class="form-button" th:action="@{/logout}" method="post">
+            <input type="submit" value="Log out" />
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <form
+      th:object="${renting}"
+      th:action="@{/editRenting/{id}(id=${renting.id})}"
+      method="post"
+      action="#"
+    >
+      <input type="hidden" th:field="*{id}" />
+      <div class="form-group">
+        <img
+          th:src="@{'data:image/png;base64,' + *{cat.base64Image}}"
+          th:alt="*{cat.name}"
+          width="200"
+          height="300"
+        />
+      </div>
+      <div class="form-group">
+        <label>Cat Name:</label>
+        <p th:text="*{cat.name}"></p>
+      </div>
+      <div class="form-group">
+        <label for="rentalDate">Rental Date:</label>
+        <input type="date" id="rentalDate" th:field="*{rentalDate}" />
+      </div>
+      <div class="form-group">
+        <label for="rentalDuration">Rental Duration (days):</label>
+        <input
+          type="number"
+          id="rentalDuration"
+          th:field="*{rentalDuration}"
+          min="1"
+          th:value="*{rentalDuration}"
+        />
+        <span
+          class="error"
+          th:if="${#fields.hasErrors('rentalDuration')}"
+          th:errors="*{rentalDuration}"
+        ></span>
+      </div>
+      <input type="submit" value="Edit Rent" />
+    </form>
+  </body>
+</html>

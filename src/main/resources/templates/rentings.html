@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/css/main.css"
+      th:href="@{/css/main.css}"
+    />
+    <title>List of Rentings</title>
+    <style></style>
+  </head>
+  <body>
+    <nav class="navigation-header">
+      <h1>List of Rentings</h1>
+      <div>
+        <div class="user-role">
+          <p>Welcome back <span sec:authentication="name"></span> !</p>
+        </div>
+        <div class="logout">
+          <form class="form-button" th:action="@{/logout}" method="post">
+            <input type="submit" value="Log  out" />
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <table>
+      <tr>
+        <th>Cat Image</th>
+        <th>Cat Name</th>
+        <th>Breed</th>
+        <th>Favorite Toy</th>
+        <th>Renter</th>
+        <th>City</th>
+        <th>Post Code</th>
+        <th>Street</th>
+        <th>Rental Date</th>
+        <th>Rental Duration</th>
+
+        <th sec:authorize="hasAuthority('ADMIN')"></th>
+        <th sec:authorize="hasAuthority('ADMIN')"></th>
+      </tr>
+
+      <tr th:each="renting : ${rentings}">
+        <td>
+          <img
+            th:if="${renting.cat.base64Image}"
+            th:src="'data:image/png;base64,' + ${renting.cat.base64Image}"
+            th:alt="${renting.cat.name}"
+            width="150px"
+            height="200px"
+          />
+        </td>
+        <td th:text="${renting.cat.name}"></td>
+        <td th:text="${renting.cat.breed}"></td>
+        <td th:text="${renting.cat.toy}"></td>
+        <td th:text="${renting.cat.user.username}"></td>
+        <td th:text="${renting.cat.address.city}"></td>
+        <td th:text="${renting.cat.address.postCode}"></td>
+        <td th:text="${renting.cat.address.street}"></td>
+        <td th:text="${renting.rentalDate}"></td>
+        <td th:text="${renting.rentalDuration}"></td>
+
+        <td sec:authorize="hasAuthority('ADMIN')">
+          <a th:href="@{/editRenting/{id}(id=${renting.id})}">Edit</a>
+        </td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+          <a th:href="@{/deleteRenting/{id}(id=${renting.id})}">Delete</a>
+        </td>
+      </tr>
+    </table>
+  
+    <button
+      sec:authorize="hasAuthority('ADMIN')"
+      class="users-button"
+      onclick="location.href='/'"
+    >
+      Back to Cats
+    </button>
+  </body>
+</html>
