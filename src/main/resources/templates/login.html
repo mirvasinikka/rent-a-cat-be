@@ -25,11 +25,11 @@
           <label for="password">Password</label>
           <input type="password" id="password" name="password" />
         </div>
-        <div class="button-container">
-                <input type="submit" class="form-button" value="Login" />
-                <button th:action="@{/registerUser}" method="get" class="from-button">Register</button>
-            </div>
       </div>
+      <input type="submit" class="from-button" value="Login" />
+    </form>
+    <form th:action="@{/registerUser}" method="get">
+      <input type="submit" class="from-button" value="Register" />
     </form>
   </body>
 </html>

@@ -38,7 +38,7 @@ public class AppUserController {
         return "login";
     }	
 
-    @GetMapping("/register")
+    @GetMapping("/registerUser")
     public String addUser(Model model) {
         model.addAttribute("registerform", new RegisterForm());
         return "registerUser";
@@ -47,7 +47,6 @@ public class AppUserController {
     @PostMapping("/saveuser")
     public String save(
             @Valid @ModelAttribute("registerform") RegisterForm registerForm,
-            Model model,
             BindingResult bindingResult) {
         try {
             if (!bindingResult.hasErrors()) {
@@ -82,7 +81,6 @@ public class AppUserController {
             }
             return "redirect:/users";
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
             return "errorpage";
         }
     }

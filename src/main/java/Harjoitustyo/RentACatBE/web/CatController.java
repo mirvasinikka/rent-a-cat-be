@@ -75,7 +75,7 @@ public class CatController {
     public String save(@Valid @ModelAttribute("cat") Cat cat, BindingResult bindingResult, Model model, Principal principal, @RequestParam("imageFile") MultipartFile imageFile) {
         try {
             if (bindingResult.hasErrors()) {
-                return "add";
+                return "addCat";
             }
 
             Address address = cat.getAddress();
@@ -148,7 +148,7 @@ public class CatController {
       
         try {    
             if (bindingResult.hasErrors()) {
-                return "edit";
+                return "editCat";
             }
 
             Address address = cat.getAddress();

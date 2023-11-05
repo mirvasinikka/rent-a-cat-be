@@ -124,7 +124,8 @@ public class RentingController {
     @GetMapping("/rentings")
     public String showRentings(Model model) {
        
-        Iterable<Renting> rentings = rentingRepository.findAll();
+        try {
+           Iterable<Renting> rentings = rentingRepository.findAll();
 
         for(Renting renting : rentings) {
             Cat cat = renting.getCat();
@@ -139,6 +140,11 @@ public class RentingController {
         model.addAttribute("rentings", rentings);
 
         return "rentings";
+        
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Failed to load rentings" + e.getMessage());
+            return "errorpage";
+        }
     }
 
 
@@ -149,27 +155,39 @@ public class RentingController {
     }
 
     @GetMapping("/editRenting/{id}")
-    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        Renting renting = rentingRepository.findById(id).orElse(null);
+    public String showEditRenting(@PathVariable("id") Long id, Model model) {
+        try {
+            Renting renting = rentingRepository.findById(id).orElse(null);
 
-        Cat cat = renting.getCat();
+            if (renting != null) {
+                Cat cat = renting.getCat();
 
-        byte[] image = cat.getImage();
+            byte[] image = cat.getImage();
 
-        if (image != null) {
-            String base64Image = Base64.getEncoder().encodeToString(image);
-            cat.setBase64Image(base64Image);
+            if (image != null) {
+                String base64Image = Base64.getEncoder().encodeToString(image);
+                cat.setBase64Image(base64Image);
+            }
+
+            renting.setCat(cat);
+
+            model.addAttribute("renting", renting);
+            return "editRenting";
+            
+            } else {
+                model.addAttribute("errorMessage", "Renting doesn't exist" + id);
+                return "errorpage";
+            }
+            
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Failed to edit renting of" + id + e.getMessage());
+            return "errorpage";
         }
-
-        renting.setCat(cat);
-
-        model.addAttribute("renting", renting);
-        return "editRenting";
     }
 
 
     @PostMapping("/editRenting/{id}")
-    public String updateRenting(@PathVariable("id") Long id, @Valid @ModelAttribute("renting") Renting updatedRenting, BindingResult bindingResult, Model model,  Principal principal) {
+    public String editRenting(@PathVariable("id") Long id, @Valid @ModelAttribute("renting") Renting updatedRenting, BindingResult bindingResult, Model model,  Principal principal) {
        try {
 
          if (bindingResult.hasErrors()) {
