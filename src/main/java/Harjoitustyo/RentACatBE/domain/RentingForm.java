@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +15,6 @@ public class RentingForm {
 
     @NotNull(message = "Rental date is required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent(message = "Rental date must be in the present or future")
     private Date rentalDate = new Date();
 
     @NotNull(message = "Rental duration is required")

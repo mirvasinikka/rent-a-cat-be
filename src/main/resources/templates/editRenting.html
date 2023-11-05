@@ -50,6 +50,13 @@
       <div class="form-group">
         <label for="rentalDate">Rental Date:</label>
         <input type="date" id="rentalDate" th:field="*{rentalDate}" />
+        <p
+          class="error-message"
+          th:if="${#fields.hasErrors('rentalDate')}"
+          th:errors="*{rentalDate}"
+        >
+          rentalDate Error
+        </p>
       </div>
       <div class="form-group">
         <label for="rentalDuration">Rental Duration (days):</label>
@@ -57,14 +64,15 @@
           type="number"
           id="rentalDuration"
           th:field="*{rentalDuration}"
-          min="1"
           th:value="*{rentalDuration}"
         />
-        <span
-          class="error"
+        <p
+          class="error-message"
           th:if="${#fields.hasErrors('rentalDuration')}"
           th:errors="*{rentalDuration}"
-        ></span>
+        >
+          rentalDuration Error
+        </p>
       </div>
       <input type="submit" value="Edit Rent" />
     </form>
