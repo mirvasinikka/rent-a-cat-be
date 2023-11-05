@@ -13,6 +13,9 @@ import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Entity
 public class Renting {
@@ -30,10 +33,13 @@ public class Renting {
 	@JoinColumn(name = "cat_id")
 	private Cat cat; 
 
-    @Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date rentalDate;
-    
+    @FutureOrPresent(message = "Rental date must be in the present or future")
+	private Date rentalDate;
+
+    @Min(value = 1, message = "Rental duration must be at least 1 day")
+    @Max(value = 365, message = "Rental duration cannot exceed 365 days")
 	private int rentalDuration;
 
 	public Renting() {
