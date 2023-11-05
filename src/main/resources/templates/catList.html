@@ -39,7 +39,7 @@
         <p><strong>Post Code:</strong> <span th:text="${cat.address.postCode}"></span></p>
         <p><strong>Street:</strong> <span th:text="${cat.address.street}"></span></p>
         <a th:href="@{'/rent?catId=' + ${cat.id}}" class="rent-button">Rent this cat</a>
-        <a th:href="@{'/edit/' + ${cat.id}}" sec:authorize="hasAuthority('ADMIN')">Edit</a>
+        <a th:href="@{'/editCat/' + ${cat.id}}" sec:authorize="hasAuthority('ADMIN')">Edit</a>
         <a th:href="@{'/delete/' + ${cat.id}}" sec:authorize="hasAuthority('ADMIN')" class="delete">Delete</a>
         
     </div>

@@ -61,7 +61,7 @@ public class CatController {
             }
 
             model.addAttribute("cats", cats);
-            return "list";
+            return "catList";
         } catch (Exception e) {
             model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
             return "errorpage";
@@ -116,7 +116,7 @@ public class CatController {
     public String deleteCat(@PathVariable("id") Long id) {
         try {
             catRepository.deleteById(id);
-            return "redirect:/catList";
+            return "redirect:/";
         } catch (Exception e) {
         
             return "errorpage";
