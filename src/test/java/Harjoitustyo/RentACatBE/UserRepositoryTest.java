@@ -75,4 +75,16 @@ public class UserRepositoryTest {
 			assertThat(saveuser.getEmail()).isEqualTo("molla.maija@mi.fi");
 	        
 	     }
+
+		 @Test
+    public void deleteUser() throws Exception {
+        AppUser userToDelete = new AppUser();
+        userToDelete.setUsername("testuser");
+        userToDelete = userRepository.save(userToDelete);
+        mockMvc.perform(MockMvcRequestBuilders.get("/deleteuser/{id}", userToDelete.getId()))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection()) 
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/users")); 
+    }
+
+		 
 }
