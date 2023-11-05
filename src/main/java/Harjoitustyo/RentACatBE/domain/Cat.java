@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -53,6 +54,7 @@ public class Cat {
 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
+	@Valid
     private Address address;
 
 	@OneToMany(mappedBy = "cat", cascade = CascadeType.ALL)
