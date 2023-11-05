@@ -26,11 +26,11 @@ public class Cat {
 	private Long cat_id;
 	
 	@NotBlank( message = "Please provide cats name")
-	@Size (min=2, max=10)
+	@Size (min=2, max=10, message = "Name must be between 2 and 10 characters")
 	private String name;
 	
 	@NotBlank(message = "Please provide cats breed")
-	@Size (min=3, max=30)
+    @Size(min = 3, max = 30, message = "Breed must be between 3 and 30 characters")
 	private String breed;
 
 	@Lob
@@ -42,7 +42,7 @@ public class Cat {
 
 
 	@NotBlank(message = "Please tell us the cats favourite toy")
-	@Size (min=2, max=20)
+	@Size (min=2, max=20, message = "Favorite toy must be between 2 and 20 characters")
 	private String toy;
 
 
