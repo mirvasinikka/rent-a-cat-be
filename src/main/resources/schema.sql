@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS cats
 , toy VARCHAR(50) NOT NULL
 , address_id BIGINT
 , user_id BIGINT
+, image LONGBLOB
 , FOREIGN KEY (address_id) REFERENCES addresses(address_id)
 , FOREIGN KEY (user_id) REFERENCES app_user(user_id)
 );

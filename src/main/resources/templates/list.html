@@ -8,63 +8,43 @@
     <link
       type="text/css"
       rel="stylesheet"
-      href="/css/main.css"
-      th:href="@{/css/main.css}"
+      href="/css/list.css"
+      th:href="@{/css/list.css}"
     />
     <title>Rent a Cat</title>
     <style></style>
   </head>
   <body>
-    <nav class="navigation-header">
-      <h1>List of Cats</h1>
-      <div>
-        <div class="user-role">
-          <p>Welcome back <span sec:authentication="name"></span> !</p>
-        </div>
-        <div class="logout">
-          <form class="from-button" th:action="@{/logout}" method="post">
-            <input type="submit" value="Log  out" />
-          </form>
-        </div>
+     <div class="top">
+      <h1>Rent a Cat</h1>
+      <div class="top-right">
+      <div class="user-role">
+        <p>Welcome back <span sec:authentication="name"></span> !</p>
       </div>
-    </nav>
-
-    <table>
-      <tr>
-        <th>Cat Name</th>
-        <th>Breed</th>
-        <th>Favorite Toy</th>
-        <th>Owner</th>
-        <th>City</th>
-        <th>Post Code</th>
-        <th>Street</th>
-        <th></th>
-        <th sec:authorize="hasAuthority('ADMIN')"></th>
-        <th sec:authorize="hasAuthority('ADMIN')"></th>
-      </tr>
-
-      <tr th:each="cat : ${cats}">
-        <td th:text="${cat.name}"></td>
-        <td th:text="${cat.breed}"></td>
-        <td th:text="${cat.toy}"></td>
-        <td th:text="${cat.user.username}"></td>
-        <td th:text="${cat.address.city}"></td>
-        <td th:text="${cat.address.postCode}"></td>
-        <td th:text="${cat.address.street}"></td>
-
-        <td sec:authorize="hasAuthority('ADMIN')">
-          <a th:href="@{/delete/{id}(id=${cat.id})}">Delete</a>
-        </td>
-        <td sec:authorize="hasAuthority('ADMIN')">
-          <a th:href="@{/edit/{id}(id=${cat.id})}">Edit</a>
-        </td>
-        <td>
-          <a th:href="@{'/rent?catId=' + ${cat.id}}" class="rent-button"
-            >Rent this cat</a
-          >
-        </td>
-      </tr>
-    </table>
+      <div class="logout-form">
+        <form th:action="@{/logout}" method="post">
+          <input type="submit" value="Log out" />
+        </form>
+      </div>
+      </div>
+    </div>
+<div class="container">
+     <div th:each="cat : ${cats}" class="cat-card">
+        <img class="image" th:if="${cat.base64Image}" th:src="'data:image/png;base64,' + ${cat.base64Image}" alt="Cat Image" />
+        <h2 th:text="${cat.name}"></h2>
+        <p><strong>Breed:</strong> <span th:text="${cat.breed}"></span></p>
+        <p><strong>Favorite Toy:</strong> <span th:text="${cat.toy}"></span></p>
+        <p><strong>Owner:</strong> <span th:text="${cat.user.username}"></span></p>
+        <p><strong>City:</strong> <span th:text="${cat.address.city}"></span></p>
+        <p><strong>Post Code:</strong> <span th:text="${cat.address.postCode}"></span></p>
+        <p><strong>Street:</strong> <span th:text="${cat.address.street}"></span></p>
+        <a th:href="@{'/rent?catId=' + ${cat.id}}" class="rent-button">Rent this cat</a>
+        <a th:href="@{'/edit/' + ${cat.id}}" sec:authorize="hasAuthority('ADMIN')">Edit</a>
+        <a th:href="@{'/delete/' + ${cat.id}}" sec:authorize="hasAuthority('ADMIN')" class="delete">Delete</a>
+        
+    </div>
+    </div>
+    <div class="bottom">
     <button
       sec:authorize="hasAuthority('ADMIN')"
       class="add-button"
@@ -79,5 +59,6 @@
     >
       List of users
     </button>
+    </div>
   </body>
 </html>

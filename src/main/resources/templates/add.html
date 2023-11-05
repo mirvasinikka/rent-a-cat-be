@@ -2,15 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link type="text/css" rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
- 
 <meta charset="UTF-8">
 <title>Add a Cat</title>
 </head>
 <body>
 	<h2>Cat info</h2>
-	
-	<div>
-		<form th:object="${cat}" th:action="@{/save}" action="#" method="post">
+		<form th:object="${cat}" th:action="@{/save}" action="#" method="post" enctype="multipart/form-data">
+  		  <div class="form-group">
+	        <label for="imageFile">Image</label>
+        	<input type="file" name="imageFile" accept="image/*" id="imageFileInput" onchange="previewImage(this)"/>
+			<img id="imagePreview" src="#" th:alt="*{name}" width="200" height="300" style="display: none;" />
+			</div>
+		
 			<div class="form-group">
 			<label for="name">Name</label>
 			<input type="text" id="name" th:field="*{name}" />
@@ -30,12 +33,11 @@
 			</div>
 
 			<div class="form-group">
-			<label for="city">City</label>
-			<input type="text" id="city" th:field="*{address.city}" />
-			<div th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}">Error</div>
+			<label for="street">Street</label>
+			<input type="text" id="street" th:field="*{address.street}" />
+			<div th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}">Error</div>
 			</div>
-			
-			
+
 			<div class="form-group">
 			<label for="postCode">Post Code</label>
 			<input type="text" id="postCode" th:field="*{address.postCode}" />
@@ -43,16 +45,35 @@
 			</div>
 			
 			<div class="form-group">
-			<label for="street">Street</label>
-			<input type="text" id="street" th:field="*{address.street}" />
-			<div th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}">Error</div>
+			<label for="city">City</label>
+			<input type="text" id="city" th:field="*{address.city}" />
+			<div th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}">Error</div>
 			</div>
-			
 
 			<div class="form-group">
 			<input type="submit" value="Save"></input>
+			<a class="add-button" href="/list">Back to cats</a>
 			</div>
 		</form>
-	</div>
+	
+	<script>
+	function previewImage(input) {
+		const imagePreview = document.getElementById("imagePreview");
+		const imageFileInput = document.getElementById("imageFileInput");
+
+		if (input.files && input.files[0]) {
+			const reader = new FileReader();
+
+			reader.onload = function (e) {
+				imagePreview.src = e.target.result;
+				imagePreview.style.display = "block";
+			};
+
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			imagePreview.style.display = "none";
+		}
+	}
+</script>
 </body>
 </html>

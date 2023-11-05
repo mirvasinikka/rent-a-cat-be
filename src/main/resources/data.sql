@@ -12,10 +12,15 @@ INSERT INTO app_user  (username, email, password, role, f_name , l_name , addres
 ("Jaana","jaana.mallika@example.fi", "$2a$10$XPMxMF40UOfpo1jxytJ8g.B3uEA9VfqvqHa/WBqTI.HpUew3uzlEa", "USER", "Jaana", "Mallikas", 2),
 ("Jussi","jussi@example.fi", "$2a$10$XPMxMF40UOfpo1jxytJ8g.B3uEA9VfqvqHa/WBqTI.HpUew3uzlEa", "USER", "Jussi", "Mallikas", 1);
 
-INSERT INTO cats (name, breed, toy, address_id, user_id) VALUES
-("Miri", "Scottish long hair", "pallo", 1, 4),
-("Musti", "Persian", "naru",  2, 6),
-("Molla", "Thai Siamese", "Hiiri", 3, 5);
+
+INSERT INTO cats (name, breed, toy, address_id, user_id, image) VALUES
+("Miri", "Scottish long hair", "pallo", 1, 1, null),
+("Musti", "Persian", "naru",  2, 1, null),
+("Molla", "Thai Siamese", "Hiiri", 3, 1, null),
+("Maukka", "Scottish fold", "pallo", 1, 1, null),
+("Maukku", "Persian", "naru",  2, 1, null),
+("Maukki", "Thai Siamese", "Hiiri", 3, 1, null);
+
 
 INSERT INTO renting (rental_date, rental_duration, user_id, cat_id) VALUES
 ("2024-01-01", 5, 1, 1);
