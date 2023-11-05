@@ -73,7 +73,7 @@ public class UserRepositoryTest {
 	                .param("street", "123 Main St")
 	                .param("city", "Example City")
 	                .param("postCode", "12345"))
-	        		.andExpect(MockMvcResultMatchers.redirectedUrl("/list"));
+	        		.andExpect(MockMvcResultMatchers.redirectedUrl("/"));
 
 	        AppUser savedUser = userRepository.findByUsername(username);
 	        assertNotNull(savedUser);

@@ -46,7 +46,7 @@ public class CatController {
         return "Tämä on pääsivu :) jee";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public String catList(Model model) {
         try {   
             Iterable<Cat> cats = catRepository.findAll();
@@ -105,7 +105,7 @@ public class CatController {
             }
 
             catRepository.save(cat);
-            return "redirect:/list";
+            return "redirect:/";
         } catch (Exception e) {
       
             model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
@@ -117,7 +117,7 @@ public class CatController {
     public String deleteCat(@PathVariable("id") Long id) {
         try {
             catRepository.deleteById(id);
-            return "redirect:/list";
+            return "redirect:/";
         } catch (Exception e) {
         
             return "errorpage";
@@ -176,7 +176,7 @@ public class CatController {
             }
 
             catRepository.save(cat);
-            return "redirect:/list";
+            return "redirect:/";
         } catch (Exception e) {
       
             model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
