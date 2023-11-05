@@ -18,37 +18,37 @@
 			<div class="form-group">
 			<label for="name">Name</label>
 			<input type="text" id="name" th:field="*{name}" />
-			<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+			<p class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">cat name error</p>
 			</div>
 
 			<div class="form-group">
 			<label for="breed">Breed</label>
 			<input type="text" id="breed" th:field="*{breed}" />
-			<div th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}">Error</div>
+			<p class="error-message" th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}">breed error</p>
 			</div>
 
 			<div class="form-group">
 			<label for="toy">Favorite Toy</label>
 			<input type="text" id="toy" th:field="*{toy}" />
-			<div th:if="${#fields.hasErrors('toy')}" th:errors="*{toy}">Error</div>
+			<p class="error-message" th:if="${#fields.hasErrors('toy')}" th:errors="*{toy}">toy error</p>
 			</div>
-			
- 			<div class="form-group">
+
+			<div class="form-group">
 			<label for="street">Street</label>
 			<input type="text" id="street" th:field="*{address.street}" />
-			<div th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}">Error</div>
+			<p class="error-message" th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}">street error</p>
 			</div>
-			
+
 			<div class="form-group">
-			<label for="postCode">Post code</label>
+			<label for="postCode">Post Code</label>
 			<input type="text" id="postCode" th:field="*{address.postCode}" />
-			<div th:if="${#fields.hasErrors('address.postCode')}" th:errors="*{address.postCode}">Error</div>
+			<p class="error-message" th:if="${#fields.hasErrors('address.postCode')}" th:errors="*{address.postCode}">postCode error</p>
 			</div>
 			
 			<div class="form-group">
 			<label for="city">City</label>
 			<input type="text" id="city" th:field="*{address.city}" />
-			<div th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}">Error</div>
+			<p class="error-message" th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}">city error</p>
 			</div>
 			
 			<div class="form-group">
