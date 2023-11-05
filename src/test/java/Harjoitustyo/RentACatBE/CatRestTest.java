@@ -10,6 +10,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Harjoitustyo.RentACatBE.domain.Cat;
+
 import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -44,6 +48,22 @@ public class CatRestTest {
         mockMvc.perform(get("/cat/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void restAddCat() throws Exception {
+        Cat newCat = new Cat();
+        newCat.setName("test");
+        newCat.setBreed("test");
+        newCat.setToy("test");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String catJson = objectMapper.writeValueAsString(newCat);
+
+        mockMvc.perform(post("/cat")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(catJson))
+            .andExpect(status().isCreated());
     }
 
 
