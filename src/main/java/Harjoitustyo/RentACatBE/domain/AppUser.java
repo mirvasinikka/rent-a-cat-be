@@ -16,6 +16,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 
@@ -29,20 +33,31 @@ public class AppUser {
 	@Column(name = "user_id", nullable = false, updatable = false)
 	private Long user_id;
 	
+
 	@Column(name = "username", nullable = false, unique = true)
+    @NotNull(message = "Username is required")
+    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
 	private String username;
 
     @Column(name = "email", nullable = false)
+    @NotNull(message = "Email is required")
+    @Email(message = "Email must be a valid email address")
+    @Size(min = 3, max = 50, message = "Email must be between 3 and 50 characters")
 	private String email;
 	
 	@Column(name = "password", nullable = false)
-	private String password;
+    @NotEmpty(message = "Password Check is required")
+    private String password;
 
 	
 	@Column(name = "fName", nullable = false)
+    @NotNull(message = "First name is required")
+    @Size(min = 3, max = 50, message = "First name must must be between 3 and 50 characters")
 	private String fName;
 	
 	@Column(name = "lName", nullable = false)
+    @NotNull(message = "Last name is required")
+    @Size(min = 3, max = 50, message = "Last name must must be between 3 and 50 characters")
 	private String lName;
 
 
