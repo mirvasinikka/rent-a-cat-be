@@ -44,12 +44,14 @@ public class CatRepositoryTest {
         Long catId = 1L;
         Optional<Cat> cat = catRepository.findById(catId);
         assertThat(cat).isPresent();
+        assertThat(cat.get().getId()).isEqualTo(catId);
     }
 
     @Test
     void findAllCats() {
         List<Cat> cats = (List<Cat>) catRepository.findAll();
         assertThat(cats).isNotEmpty();
+        assertThat(cats.size()).isGreaterThan(0);
     }
 
     @Test

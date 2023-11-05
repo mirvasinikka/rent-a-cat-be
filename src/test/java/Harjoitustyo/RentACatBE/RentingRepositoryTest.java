@@ -52,7 +52,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date rentalDate = dateFormat.parse("2024-01-01");
 
         AppUser appUser = new AppUser();
-	    AppUser saveuser = userRepository.save(appUser);
+	    userRepository.save(appUser);
 
 
         Cat cat = new Cat();
@@ -60,7 +60,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         cat.setBreed("Persian");
         cat.setToy("String");
 
-        Cat savedCat = catRepository.save(cat);
+        catRepository.save(cat);
 
 		Renting rent = new Renting(appUser, cat, rentalDate, 4);
 		rentingRepository.save(rent);
