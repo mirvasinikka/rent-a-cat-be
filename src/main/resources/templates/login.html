@@ -8,8 +8,8 @@
     <link
       type="text/css"
       rel="stylesheet"
-      href="/css/main.css"
-      th:href="@{/css/main.css}"
+      href="/css/login.css"
+      th:href="@{/css/login.css}"
     />
     <title>Login</title>
   </head>
@@ -25,12 +25,11 @@
           <label for="password">Password</label>
           <input type="password" id="password" name="password" />
         </div>
-        <input type="submit" class="form-button" value="Login" />
+        <div class="button-container">
+                <input type="submit" class="form-button" value="Login" />
+                <button th:action="@{/registerUser}" method="get" class="from-button">Register</button>
+            </div>
       </div>
-    </form>
-
-    <form th:action="@{/registerUser}" method="get">
-      <input type="submit" class="from-button" value="Register" />
     </form>
   </body>
 </html>
