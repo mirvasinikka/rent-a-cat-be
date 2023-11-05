@@ -110,12 +110,12 @@ public class CatController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteCat(@PathVariable("id") Long id) {
+    public String deleteCat(@PathVariable("id") Long id, Model model) {
         try {
             catRepository.deleteById(id);
             return "redirect:/";
         } catch (Exception e) {
-        
+            model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
             return "errorpage";
         }
     }

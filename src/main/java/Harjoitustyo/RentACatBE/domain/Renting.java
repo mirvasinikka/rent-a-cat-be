@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,9 +14,9 @@ import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Renting {
@@ -33,11 +34,12 @@ public class Renting {
 	@JoinColumn(name = "cat_id")
 	private Cat cat; 
 
+    @NotNull(message = "Rental date is required")
 	@Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent(message = "Rental date must be in the present or future")
 	private Date rentalDate;
 
+    @NotNull(message = "Rental duration is required")
     @Min(value = 1, message = "Rental duration must be at least 1 day")
     @Max(value = 365, message = "Rental duration cannot exceed 365 days")
 	private int rentalDuration;

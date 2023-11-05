@@ -12,13 +12,12 @@
       th:href="@{/css/main.css}"
     />
     <title>Rent info</title>
-    
   </head>
   <body>
     <h2>Rent a Cat</h2>
     <form th:action="@{/rent}" method="post" th:object="${rentingForm}">
       <div>
-         <label for="catName">Cat name:</label>
+        <label for="catName">Cat name:</label>
         <p th:text="${selectedCat.name}"></p>
         <input
           type="hidden"
@@ -30,15 +29,24 @@
       <div>
         <label for="rentalDate">Rental Date:</label>
         <input type="date" id="rentalDate" th:field="*{rentalDate}" />
+        <p
+          class="error-message"
+          th:if="${#fields.hasErrors('rentalDate')}"
+          th:errors="*{rentalDate}"
+        >
+          rentalDate Error
+        </p>
       </div>
       <div>
         <label for="rentalDuration">Rental Duration (days):</label>
-        <input
-          type="number"
-          id="rentalDuration"
-          th:field="*{rentalDuration}"
-          min="1"
-        />
+        <input type="number" id="rentalDuration" th:field="*{rentalDuration}" />
+        <p
+          class="error-message"
+          th:if="${#fields.hasErrors('rentalDuration')}"
+          th:errors="*{rentalDuration}"
+        >
+          rentalDuration Error
+        </p>
       </div>
       <div>
         <input type="submit" value="Rent Cat" />

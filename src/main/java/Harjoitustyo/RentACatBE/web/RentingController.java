@@ -40,31 +40,39 @@ public class RentingController {
 	public String showRentingForm(@RequestParam("catId") Long catId, Model model) {
 		Cat selectedCat = catRepository.findById(catId).orElse(null);
 		
-		try {
+	try {
 		
-    if (selectedCat != null) {
-        model.addAttribute("selectedCat", selectedCat);
+        if (selectedCat != null) {
+            model.addAttribute("selectedCat", selectedCat);
 
-        RentingForm rentingForm = new RentingForm();
-        model.addAttribute("rentingForm", rentingForm);
+            RentingForm rentingForm = new RentingForm();
+            model.addAttribute("rentingForm", rentingForm);
 
-        return "rent";
-    } else {
-        model.addAttribute("errorMessage", "Cat not found");
-        return "errorpage";
-        
-    }
- 
-		} catch (Exception e) {
-			model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
+            return "rent";
+        } else {
+            model.addAttribute("errorMessage", "Cat not found");
+            return "errorpage";
+            
+        }
+
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
             return "errorpage";
         }
 
-	}
-	
+    }
+
+   
 
 	@PostMapping("/rent")
-	public String processRentingForm(@Valid @ModelAttribute("rentingForm") RentingForm rentingForm, Model model, Principal principal) {
+	public String processRentingForm(@Valid @ModelAttribute("rentingForm") RentingForm rentingForm, BindingResult bindingResult, Model model, Principal principal) {
+
+
+    if (bindingResult.hasErrors()) {
+        Cat selectedCat = catRepository.findById(rentingForm.getCatId()).orElse(null);
+        model.addAttribute("selectedCat", selectedCat);
+        return "rent";
+    }
 
     Long catId = rentingForm.getCatId();
     Date rentalDate = new Date();
@@ -74,38 +82,37 @@ public class RentingController {
     
 
     try {
- 
-    if (cat != null && principal != null) {
-        String username = principal.getName();
-        AppUser user = userRepository.findByUsername(username);
+        if (cat != null && principal != null) {
+            String username = principal.getName();
+            AppUser user = userRepository.findByUsername(username);
 
-        cat.setUser(user);
-        catRepository.save(cat);
+            cat.setUser(user);
+            catRepository.save(cat);
+    
+            Renting renting = new Renting();
+            renting.setCat(cat);
+            renting.setRentalDate(rentalDate);
+            renting.setRentalDuration(rentalDuration);
+            renting.setUser(user);
+
+            rentingRepository.save(renting);
+
+            catRepository.save(cat);
+
+            model.addAttribute("successMessage", "Cat rented successfully!");
+
+            model.addAttribute("cat", cat);
+            model.addAttribute("user", user);
+            model.addAttribute("renting", renting);
+
+
   
-        Renting renting = new Renting();
-        renting.setCat(cat);
-        renting.setRentalDate(rentalDate);
-        renting.setRentalDuration(rentalDuration);
-        renting.setUser(user);
-
-        rentingRepository.save(renting);
-
-        catRepository.save(cat);
-
-        model.addAttribute("successMessage", "Cat rented successfully!");
-
-        model.addAttribute("cat", cat);
-        model.addAttribute("user", user);
-        model.addAttribute("renting", renting);
-
-
-  
-        return "rentalConfirmation";
-    } else {
-        
-        model.addAttribute("errorMessage", "Sorry, this cat is not available for rent.");
-        return "errorpage";
-    }
+            return "rentalConfirmation";
+        } else {
+            
+            model.addAttribute("errorMessage", "Sorry, this cat is not available for rent.");
+            return "errorpage";
+        }
     } catch (Exception e) {
         model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
         return "errorpage";
@@ -156,16 +163,21 @@ public class RentingController {
 
         renting.setCat(cat);
 
-        
-        
         model.addAttribute("renting", renting);
         return "editRenting";
     }
 
 
     @PostMapping("/editRenting/{id}")
-    public String updateRenting(@PathVariable("id") Long id, @Valid @ModelAttribute("renting") Renting updatedRenting, BindingResult bindingResult,  Principal principal) {
-         Renting existingRenting = rentingRepository.findById(id).orElse(null);
+    public String updateRenting(@PathVariable("id") Long id, @Valid @ModelAttribute("renting") Renting updatedRenting, BindingResult bindingResult, Model model,  Principal principal) {
+       try {
+
+         if (bindingResult.hasErrors()) {
+           return "editRenting";
+        }
+        
+    
+        Renting existingRenting = rentingRepository.findById(id).orElse(null);
 
         if (existingRenting != null) {
             existingRenting.setRentalDate(updatedRenting.getRentalDate());
@@ -175,8 +187,13 @@ public class RentingController {
 
             return "redirect:/rentings"; 
         } else {
+            model.addAttribute("errorMessage", "Rent doesn't exist" + id);
             return "errorpage";
         }
+       } catch (Exception e) {
+        model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
+        return "errorpage";
+    }
 
     }
 

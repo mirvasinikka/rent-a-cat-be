@@ -28,7 +28,6 @@ public class AppUserController {
             model.addAttribute("users", userRepository.findAll());
             return "users";
         } catch (Exception e) {
-            
             model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
             return "errorpage";
         }
@@ -48,6 +47,7 @@ public class AppUserController {
     @PostMapping("/saveuser")
     public String save(
             @Valid @ModelAttribute("registerform") RegisterForm registerForm,
+            Model model,
             BindingResult bindingResult) {
         try {
             if (!bindingResult.hasErrors()) {
@@ -82,7 +82,7 @@ public class AppUserController {
             }
             return "redirect:/users";
         } catch (Exception e) {
-            
+            model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
             return "errorpage";
         }
     }
