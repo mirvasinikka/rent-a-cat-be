@@ -27,7 +27,7 @@ public class Cat {
 	private Long cat_id;
 	
 	@NotBlank( message = "Please provide cats name")
-	@Size (min=2, max=10, message = "Name must be between 2 and 10 characters")
+	@Size (min=2, max=20, message = "Name must be between 2 and 20 characters")
 	private String name;
 	
 	@NotBlank(message = "Please provide cats breed")
