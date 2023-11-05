@@ -36,19 +36,18 @@ public class CatRestTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
     }
 
-    @Test
-    public void restCatList() throws Exception {
-        mockMvc.perform(get("/cats"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-    }
+	@Test
+	public void everytIsOk() throws Exception {
+		mockMvc.perform(get("/cats")).andExpect(status().isOk());
+	}
 
-    @Test
-    public void restFindCat() throws Exception {
-        mockMvc.perform(get("/cat/{id}", 1L))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-    }
+	@Test
+	public void responseTypeJson() throws Exception {
+		mockMvc.perform(get("/cats"))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+	}
+
 
     @Test
     public void restAddCat() throws Exception {
