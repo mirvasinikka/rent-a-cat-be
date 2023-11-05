@@ -47,6 +47,7 @@ public class AppUser {
 	
 	@Column(name = "password", nullable = false)
     @NotEmpty(message = "Password Check is required")
+    @JsonIgnore
     private String password;
 
 	

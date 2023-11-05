@@ -2,6 +2,9 @@ package Harjoitustyo.RentACatBE.domain;
 
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,10 +38,12 @@ public class Cat {
 	private String breed;
 
 	@Lob
+	@JsonIgnore
 	@Column(name = "image")
 	private byte[] image;
 
     @Transient
+	@JsonIgnore
     private String base64Image;
 
 
