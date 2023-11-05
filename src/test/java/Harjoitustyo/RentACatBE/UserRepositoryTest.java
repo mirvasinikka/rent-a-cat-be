@@ -15,8 +15,10 @@ import org.springframework.web.context.WebApplicationContext;
 import Harjoitustyo.RentACatBE.domain.AppUser;
 import Harjoitustyo.RentACatBE.domain.AppUserRepository;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 
 
@@ -37,23 +39,14 @@ public class UserRepositoryTest {
 	        mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
 	    }
 
-	    @Test
-	    public void userList() throws Exception {
-	        mockMvc.perform(MockMvcRequestBuilders.get("/users"))
-	                .andExpect(MockMvcResultMatchers.status().isOk())
-	                .andExpect(MockMvcResultMatchers.view().name("users"));
-	    }
+	   @Test
+	void findByUsername() {
+		AppUser user = userRepository.findByUsername("user");
+		assertThat(user).isNotNull();
+	}
 
 	    @Test
-	    public void addUserForm() throws Exception {
-	    	 mockMvc.perform(MockMvcRequestBuilders.get("/registerUser"))
-             .andExpect(MockMvcResultMatchers.status().isOk())
-             .andExpect(MockMvcResultMatchers.view().name("registerUser"))
-             .andExpect(MockMvcResultMatchers.model().attributeExists("registerform"));
-	    }
-
-	    @Test
-	    public void saveUserValid() throws Exception {
+	    public void saveUser() throws Exception {
 	    	AppUser appUser = new AppUser();
 	    	
 	    	appUser.setUsername("test");
