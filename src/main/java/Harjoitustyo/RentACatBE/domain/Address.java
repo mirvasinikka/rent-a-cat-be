@@ -11,6 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Addresses")
@@ -20,8 +23,16 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long address_id;
 	
+	@NotNull(message = "Street is required")
+	@Size(min=5, max=255, message = "Street must be at least 5 characters")
     private String street;
+
+	@NotNull(message = "City is required")
+	@Size(min=5, max=100, message = "City must be at least 5 characters")
     private String city;
+
+	@NotNull(message = "Post code is required")
+	@Pattern(regexp = "[0-9]{5}", message = "Post code must be 5 digits")
     private String postCode;
     
     @JsonIgnore
