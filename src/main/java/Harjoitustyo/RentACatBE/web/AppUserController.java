@@ -34,7 +34,12 @@ public class AppUserController {
         }
     }
 
-    @GetMapping("/registerUser")
+    @GetMapping("/login")
+    public String login() {	
+        return "login";
+    }	
+
+    @GetMapping("/register")
     public String addUser(Model model) {
         model.addAttribute("registerform", new RegisterForm());
         return "registerUser";

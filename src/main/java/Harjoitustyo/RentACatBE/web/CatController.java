@@ -35,10 +35,7 @@ public class CatController {
     @Autowired
     private AppUserRepository userRepository;
     
-    @GetMapping("/login")
-    public String login() {	
-        return "login";
-    }	
+ 
 
     @GetMapping("/main")
     @ResponseBody
