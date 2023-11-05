@@ -1,38 +1,43 @@
 package Harjoitustyo.RentACatBE.domain;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class RegisterForm {
 	
-	@NotEmpty
-	@Size(min=3, max=50, message = "Username must be between 3 and 50 characters")
-    private String username = "";
+    @NotNull(message = "Username is required")
+    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+    private String username;
 
-    @NotEmpty
-    @Size(min=3, max=50, message = "Password must be between 3 and 50 characters")
-    private String password = "";
+    @NotEmpty(message = "Password is required")
+    @Size(min=2, max=50, message = "Password must be between 2 and 50 characters")
+    private String password;
 
-    @NotEmpty
-    @Size(min=3, max=50, message = "Password must be between 3 and 50 characters")
-    private String passwordCheck = "";
+    @NotEmpty(message = "Password Check is required")
+    @Size(min=2, max=50, message = "Password Check must be between 2 and 50 characters")
+    private String passwordCheck;
     
     
-    @NotEmpty
-    @Size(min=3, max=50, message = "First name must be between 3 and 50 characters")
-    private String firstName = "";
+    @NotNull(message = "First name is required")
+    @Size(min = 3, max = 50, message = "First name must must be between 3 and 50 characters")
+    private String firstName;
     
-    @NotEmpty
-    @Size(min=3, max=50, message = "Last name must be between 3 and 50 characters")
-    private String lastName = "";
+    @NotNull(message = "Last name is required")
+     @Size(min = 3, max = 50, message = "Last name must must be between 3 and 50 characters")
+    private String lastName;
     
-    @NotEmpty
-    @Size(min=3, max=30, message = "Email must be between 3 and 30 characters")
-    private String email = "";
+    @NotNull(message = "Email is required")
+    @Email(message = "Email must be a valid email address")
+	@Size(min=3, max=50, message = "Email must be between 3 and 50 characters")
+    private String email;
 
     @NotEmpty
     private String role = "USER";
 
+	@Valid
 	private Address address = new Address();
     
 
