@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class UserRepositoryTest {
+public class AppUserRepositoryTest {
 	
 	 @Autowired
 	    private WebApplicationContext webAppContext;
@@ -39,7 +39,7 @@ public class UserRepositoryTest {
 	        mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
 	    }
 
-	   @Test
+	@Test
 	void findByUsername() {
 		AppUser user = userRepository.findByUsername("user");
 		assertThat(user).isNotNull();
@@ -69,7 +69,7 @@ public class UserRepositoryTest {
 	        
 	     }
 
-		 @Test
+	@Test
     public void deleteUser() throws Exception {
         AppUser userToDelete = new AppUser();
         userToDelete.setUsername("testuser");
