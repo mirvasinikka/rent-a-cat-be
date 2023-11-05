@@ -6,28 +6,28 @@ import jakarta.validation.constraints.Size;
 public class RegisterForm {
 	
 	@NotEmpty
-    @Size(min=3, max=30)
+	@Size(min=3, max=50, message = "Username must be between 3 and 50 characters")
     private String username = "";
 
     @NotEmpty
-    @Size(min=3, max=50)
+    @Size(min=3, max=50, message = "Password must be between 3 and 50 characters")
     private String password = "";
 
     @NotEmpty
-    @Size(min=3, max=50)
+    @Size(min=3, max=50, message = "Password must be between 3 and 50 characters")
     private String passwordCheck = "";
     
     
     @NotEmpty
-    @Size(min=3, max=50)
+    @Size(min=3, max=50, message = "First name must be between 3 and 50 characters")
     private String firstName = "";
     
     @NotEmpty
-    @Size(min=3, max=50)
+    @Size(min=3, max=50, message = "Last name must be between 3 and 50 characters")
     private String lastName = "";
     
     @NotEmpty
-    @Size(min=3, max=30)
+    @Size(min=3, max=30, message = "Email must be between 3 and 30 characters")
     private String email = "";
 
     @NotEmpty
