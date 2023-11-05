@@ -30,7 +30,7 @@
     </div>
 <div class="container">
      <div th:each="cat : ${cats}" class="cat-card">
-        <img class="image" th:if="${cat.base64Image}" th:src="'data:image/png;base64,' + ${cat.base64Image}" alt="Cat Image" />
+        <img class="image" th:if="${cat.base64Image}" th:src="'data:image/png;base64,' + ${cat.base64Image}" th:alt="${cat.name}" />
         <h2 th:text="${cat.name}"></h2>
         <p><strong>Breed:</strong> <span th:text="${cat.breed}"></span></p>
         <p><strong>Favorite Toy:</strong> <span th:text="${cat.toy}"></span></p>
@@ -59,6 +59,12 @@
     >
       List of users
     </button>
-    </div>
+    <button
+      sec:authorize="hasAuthority('ADMIN')"
+      class="add-button"
+      onclick="location.href='/rentings'"
+    >
+      List of rentings
+    </button>
   </body>
 </html>

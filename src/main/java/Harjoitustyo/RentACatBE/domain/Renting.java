@@ -1,6 +1,9 @@
 package Harjoitustyo.RentACatBE.domain;
 
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +30,10 @@ public class Renting {
 	@JoinColumn(name = "cat_id")
 	private Cat cat; 
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date rentalDate;
-
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date rentalDate;
+    
 	private int rentalDuration;
 
 	public Renting() {

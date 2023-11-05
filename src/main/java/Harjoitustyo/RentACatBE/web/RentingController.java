@@ -1,13 +1,16 @@
 package Harjoitustyo.RentACatBE.web;
 
 import java.security.Principal;
+import java.util.Base64;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -109,6 +112,73 @@ public class RentingController {
     }
 }
 
-	
+
+  
+    @GetMapping("/rentings")
+    public String showRentings(Model model) {
+       
+        Iterable<Renting> rentings = rentingRepository.findAll();
+
+        for(Renting renting : rentings) {
+            Cat cat = renting.getCat();
+            byte[] image = cat.getImage();
+
+            if (image != null) {
+                String base64Image = Base64.getEncoder().encodeToString(image);
+                cat.setBase64Image(base64Image);
+            }
+        }
+
+        model.addAttribute("rentings", rentings);
+
+        return "rentings";
+    }
+
+
+    @GetMapping("/deleteRenting/{id}")
+    public String deleteRenting(@PathVariable("id") Long id) {
+        rentingRepository.deleteById(id);
+        return "redirect:/rentings";
+    }
+
+    @GetMapping("/editRenting/{id}")
+    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
+        Renting renting = rentingRepository.findById(id).orElse(null);
+
+        Cat cat = renting.getCat();
+
+        byte[] image = cat.getImage();
+
+        if (image != null) {
+            String base64Image = Base64.getEncoder().encodeToString(image);
+            cat.setBase64Image(base64Image);
+        }
+
+        renting.setCat(cat);
+
+        
+        
+        model.addAttribute("renting", renting);
+        return "editRenting";
+    }
+
+
+    @PostMapping("/editRenting/{id}")
+    public String updateRenting(@PathVariable("id") Long id, @Valid @ModelAttribute("renting") Renting updatedRenting, BindingResult bindingResult,  Principal principal) {
+         Renting existingRenting = rentingRepository.findById(id).orElse(null);
+
+        if (existingRenting != null) {
+            existingRenting.setRentalDate(updatedRenting.getRentalDate());
+            existingRenting.setRentalDuration(updatedRenting.getRentalDuration());
+       
+            rentingRepository.save(existingRenting);
+
+            return "redirect:/rentings"; 
+        } else {
+            return "errorpage";
+        }
+
+    }
+
 
 }
